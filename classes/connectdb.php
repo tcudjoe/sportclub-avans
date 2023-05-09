@@ -2,6 +2,8 @@
 
 namespace classes;
 
+use mysqli;
+
 class connectdb
 {
     private $servername = "localhost";
