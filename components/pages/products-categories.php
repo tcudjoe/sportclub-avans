@@ -1,19 +1,19 @@
 <?php
+use classes\products;
 
-    use classes\products;
-    require_once './classes/products.php';
-    include('./classes/functions.php');
+require_once './classes/products.php';
 
-    $object = new products();
-    $products = $object->getProducts();
+$object = new products();
+$category_id = $_GET['category_id'];
+
 ?>
 
-<section id="home-cards">
+<section id="category-products">
     <div class="container">
         <div class="row">
             <h4>All products</h4>
             <?php
-            $products = $object->getProducts();
+            $products = $object->getCategoryProducts($category_id);
             foreach ($products as $product) {
                 ?>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
@@ -24,7 +24,8 @@
                             <h5 class="card-title"><?php echo $product['name'] ?></h5>
                             <p class="card-text"><?php echo $product['description'] ?></p>
                             <p class="card-text">€<?php echo $product['price'] ?></p>
-                            <a href="index.php?content=product-info&id=<?php echo $product['id']?>" class="btn btn-primary">Go somewhere</a>
+                            <a href="product-info.php?id=<?php echo $product['id'] ?>" class="btn btn-primary">More info</a>
+                            <a href="product-info.php?id=<?php echo $product['id'] ?>" class="btn btn-primary">Add to cart <i class="fa fa-cart-shopping"></i></a>
                         </div>
                     </div>
                 </div>

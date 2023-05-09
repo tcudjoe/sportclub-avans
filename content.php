@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET["content"])) {
-    include("./" . $_GET["content"] . ".php");
+    include("./components/pages/" . $_GET["content"] . ".php");
 } else {
-    include("./home.php");
+    include("./components/pages/home.php");
 }
 ?>
