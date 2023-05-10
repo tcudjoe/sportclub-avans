@@ -1,15 +1,15 @@
 <?php
 
-namespace classes;
-require_once './classes/connectdb.php';
+namespace api;
+require_once './api/ConnectDb.php';
 
-class categories
+class CategoryController
 {
     private $conn;
 
     public function __construct()
     {
-        $db = new connectdb();
+        $db = new connectDb();
         $this->conn = $db->conn;
     }
 

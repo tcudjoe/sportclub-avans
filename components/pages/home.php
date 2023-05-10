@@ -1,10 +1,10 @@
 <?php
 
-    use classes\products;
-    require_once './classes/products.php';
-    include('./classes/functions.php');
+    use api\ProductController;
+    require_once './api/ProductController.php';
+    include('./api/SecurityFunctions.php');
 
-    $object = new products();
+    $object = new ProductController();
     $products = $object->getProducts();
 ?>
 
@@ -24,7 +24,7 @@
                             <h5 class="card-title"><?php echo $product['name'] ?></h5>
                             <p class="card-text"><?php echo $product['description'] ?></p>
                             <p class="card-text">€<?php echo $product['price'] ?></p>
-                            <a href="index.php?content=product-info&id=<?php echo $product['id']?>" class="btn btn-primary">Go somewhere</a>
+                            <a href="index.php?content=pages/product-info&id=<?php echo $product['id']?>" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 </div>

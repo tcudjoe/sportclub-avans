@@ -1,5 +1,5 @@
 <?php
-use classes\connectdb;
+use api\connectDb;
 ?>
 <!doctype html>
 <html lang="en">

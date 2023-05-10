@@ -1,10 +1,10 @@
 <?php
 
-namespace classes;
+namespace api;
 
 use mysqli;
 
-class connectdb
+class ConnectDb
 {
     private $servername = "localhost";
     private $username   = "root";

@@ -1,19 +1,19 @@
 <?php
 
-namespace classes;
-require_once './classes/connectdb.php';
+namespace api;
+require_once './api/ConnectDb.php';
 
-class products
+class ProductController
 {
     private $conn;
 
     public function __construct()
     {
-        $db = new connectdb();
+        $db = new connectDb();
         $this->conn = $db->conn;
     }
 
-    //gets all products
+    //gets all productController
     public function getProducts()
     {
         $query = "SELECT * FROM products";
@@ -33,7 +33,7 @@ class products
         }
     }
 
-    //Gets products by category id and shows only all those in the category
+    //Gets productController by category id and shows only all those in the category
     public function getCategoryProducts(){
         $category_id =$this->conn->real_escape_string($_GET["category_id"]);
         $query = "SELECT * FROM products WHERE category_id = '$category_id'";
@@ -53,7 +53,7 @@ class products
         }
     }
 
-    //Gets products by id and shows them individually
+    //Gets productController by id and shows them individually
     public function getProductsinfo(){
         $id =$this->conn->real_escape_string($_GET["id"]);
         $query = "SELECT * FROM products WHERE id = '$id'";
