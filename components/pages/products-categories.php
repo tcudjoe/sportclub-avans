@@ -1,9 +1,9 @@
 <?php
-use classes\products;
+use api\ProductController;
 
-require_once './classes/products.php';
+require_once './api/ProductController.php';
 
-$object = new products();
+$object = new ProductController();
 $category_id = $_GET['category_id'];
 
 ?>

@@ -1,8 +1,8 @@
 <?php
 
-namespace classes;
+namespace api;
 
-class functions
+class SecurityFunctions
 {
     function sanitize($raw_data) {
         global $conn;
@@ -31,9 +31,9 @@ class functions
     function is_authorised($userroles) {
         if (!isset($_SESSION["id"])){
             // var_dump($_SESSION["id"]);exit();
-            return header("Location: ./index.php?content=message&alert=auth-error");
+            return header("Location: /messages.php?&alert=auth-error");
         }elseif (!in_array($_SESSION["userrole"], $userroles)) {
-            return header("Location: ./index.php?content=message&alert=auth-error-user");
+            return header("Location: /messages.php?alert=auth-error-user");
         }else {
             return true;
         }

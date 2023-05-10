@@ -1,10 +1,10 @@
 <?php
 
-use classes\products;
+use api\ProductController;
 
-require_once './classes/products.php';
+require_once './api/ProductController.php';
 
-$object = new products();
+$object = new ProductController();
 $id = $_GET['id'];
 
 $products = $object->getProductsinfo($id);
