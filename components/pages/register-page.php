@@ -18,8 +18,8 @@ if (isset($_POST['submit'])) {
                 <form method="POST" action="index.php?content=pages/register-page">
                     <div class="card">
                         <div class="text-center signupHeader">
-                            <h1 id="signupHeader">The best solution for your boat rental!</h1>
-                            <label for="signupHeader">Sign up now to rent or host a boat</label>
+                            <h1 id="signupHeader">Be a part of DSM Supermarkt!</h1>
+                            <label for="signupHeader">Sign up now to order groceries</label>
                         </div>
                         <div class="mb-3">
                             <label for="inputFirstname" class="form-label">First Name:</label>
