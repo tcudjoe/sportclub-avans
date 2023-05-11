@@ -26,7 +26,7 @@ class LoginController
         $id = $securityFunctions->sanitize($this->id);
 
         if (empty($email) || empty($password)) {
-            header("Location: /message.php?alert=no-login");
+            header("Location: ./index.php?content=messages&alert=no-login");
             exit();
         } else {
             $sql = "SELECT * FROM `users` WHERE `email` = '$email' AND `password` = '$password'";
@@ -34,14 +34,14 @@ class LoginController
 
             if (!mysqli_num_rows($result)) {
                 // Username unknown
-                header("Location: /message.php&alert=error-login");
+                header("Location: ./index.php?content=messages&alert=error-login");
                 exit();
             } else {
                 $record = mysqli_fetch_assoc($result);
 
                 if ($password !== $record["password"]) {
                     // No password match
-                    header("Location: /message.php?alert=error-login&email=$email&id=$id");
+                    header("Location: ./index.php?content=messages&alert=error-login&email=$email&id=$id");
                     exit();
                 } else {
                     $_SESSION["id"] = $record["id"];

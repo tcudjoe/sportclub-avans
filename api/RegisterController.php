@@ -30,10 +30,10 @@ class RegisterController
 //        var_dump($sql,$query);
         if ($sql == true) {
 //            var_dump($sql);
-            header("Location: /messages.php?alert=register-success");
+            header("Location: ./index.php?content=messages&alert=register-success");
         } else {
 //        var_dump($sql,$query);
-            header("Location: /messages.php?alert=register-error");
+            header("Location: ./index.php?content=messages&alert=register-error");
         }
     }
 }

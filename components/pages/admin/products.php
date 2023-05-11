@@ -3,4 +3,4 @@ include 'api/SecurityFunctions.php';
 $functions = new \api\SecurityFunctions();
 
 $functions->is_authorised(["admin"]);
-echo "Dashboard admin works!";
+echo "products admin works!";
