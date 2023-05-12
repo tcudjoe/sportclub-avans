@@ -1,115 +1,75 @@
 <?php
+use api\SecurityFunctions;
+use api\UserController;
+
 include 'api/SecurityFunctions.php';
-$functions = new \api\SecurityFunctions();
+$functions = new SecurityFunctions();
 
 $functions->is_authorised(["employee"]);
+
+
+require_once './api/OrderController.php';
+
+$object = new UserController();
 ?>
 
 <div class="container">
-    <div id="wrapper">
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                <div class="container-fluid">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    </div>
-
-                    <div class="row">
-                        <!-- Settings -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <a href="/customer/settings">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold  mb-1">
-                                                </div>
-                                                <div class="h5 mb-0 text-success text-uppercase font-weight-bold text-gray-800">Settings</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fa fa-user fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+    <div class="row">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Customer table</h1>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">id #</th>
+                            <th scope="col">Firstname</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">email</th>
+                            <th scope="col">address</th>
+                            <th scope="col">zipcode</th>
+                            <th scope="col">cityname</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $customers = $object->getCustomers();
+                        foreach ($customers as $id => $customer) {
+                            ?>
+                            <tr>
+                                <th scope="row"><?php echo $customer['id'] ?></th>
+                                <td><?php echo $customer['firstname'] ?></td>
+                                <td><?php echo $customer['surname'] ?></td>
+                                <td><?php echo $customer['email'] ?></td>
+                                <td><?php echo $customer['address'] ?></td>
+                                <td><?php echo $customer['zipcode'] ?></td>
+                                <td><?php echo $customer['cityname'] ?></td>
+                                <td>
+                                    <a href="./index.php?content=pages/employee/delete-user&id=<?php echo $customer['id'] ?>
+                                        <i aria-hidden="true" class="fa fa-ban"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/index.php?content=pages/employee/edit-user&id=<?php echo $customer['id']?>">
+                                        <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                    <a href="./index.php?content=pages/employee/add-user">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary"  type="button">Add user</button>
                         </div>
-
-                        <!-- Pending requests -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <a href="/customer/bookings">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Bookings
-                                                </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-12 mb-4">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Notifications</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <table class="table">
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a href="/blog/1">
-                                                        Welcome to Boat Share!
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="/blog/2">
-                                                        New policies for hosts of Boat Share!
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="/blog/3">
-                                                        Checkout how you can earn more!
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="/blog/4">
-                                                        How to become a super host!
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <p>
-                                        <i>
-                                            *This card is for notifications such as updates of policies, booking updates, payouts and
-                                            more.
-                                        </i>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
