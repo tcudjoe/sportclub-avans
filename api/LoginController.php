@@ -34,7 +34,7 @@ class LoginController
 
             if (!mysqli_num_rows($result)) {
                 // Username unknown
-                header("Location: ./index.php?content=messages&alert=error-login");
+                header("Location: ./index.php?content=messages&alert=login-error");
                 exit();
             } else {
                 $record = mysqli_fetch_assoc($result);

@@ -68,6 +68,9 @@ if (isset($_GET["content"])) {
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item ';
+                            echo ($active == "dashboard") ? "active" : "";
+                            echo '" href="./index.php?content=pages/admin/dashboard">Dashboard</a>
+<a class="dropdown-item ';
                             echo ($active == "products") ? "active" : "";
                             echo '" href="./index.php?content=pages/admin/products">Products</a>
                         <a class="dropdown-item ';
@@ -89,6 +92,9 @@ if (isset($_GET["content"])) {
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item ';
+                            echo ($active == "dashboard") ? "active" : "";
+                            echo '" href="./index.php?content=pages/employee/products">Dashboard</a>
+ <a class="dropdown-item ';
                             echo ($active == "products") ? "active" : "";
                             echo '" href="./index.php?content=pages/employee/products">Products</a>
                         <a class="dropdown-item ';

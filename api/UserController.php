@@ -29,5 +29,22 @@ class UserController
         }
     }
 
-
+    public function getUsers()
+    {
+        $query = "SELECT * FROM users ORDER BY firstname ASC";
+        $result = $this->conn->query($query);
+        if ($result) {
+            if ($result->num_rows > 0) {
+                $data = array();
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                return $data;
+            } else {
+                echo "No found records";
+            }
+        } else {
+            echo "error in " . $query . "<br>" . $this->conn->error;
+        }
+    }
 }
