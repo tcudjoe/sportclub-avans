@@ -1,4 +1,6 @@
 <?php
+session_start();
+session_gc();
 
 use api\CategoryController;
 use api\ProductController;
@@ -15,8 +17,6 @@ $userObj = new UserController();
 $logout = $userObj->logout();
 
 $productsObject = new ProductController();
-session_start();
-session_gc();
 
 if (isset($_GET["content"])) {
     $active = $_GET["content"];
@@ -115,11 +115,11 @@ if (isset($_GET["content"])) {
                         Options
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item ';
-                            echo ($active == "c-dashboard") ? "active" : "";
-                            echo '" href="./index.php?content=pages/customer/dashboard">Dasboard</a>
-                        <a class="dropdown-item ';
-                            echo ($active == "news") ? "active" : "";
+                        <a class="dropdown-item';
+                            echo ($active == "dashboard") ? "active" : "";
+                            echo '"href="./index.php?content=pages/customer/dashboard">Dasboard</a>
+                        <a class="dropdown-item';
+                            echo ($active == "orders") ? "active" : "";
                             echo '" href="./index.php?content=pages/customer/orders">Orders</a>
                       </div>                      
                     </li>';

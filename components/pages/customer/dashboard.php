@@ -1,8 +1,12 @@
 <?php
+
+use api\SecurityFunctions;
+
 include 'api/SecurityFunctions.php';
-$functions = new \api\SecurityFunctions();
+$functions = new SecurityFunctions();
 
 $functions->is_authorised(["customer"]);
+
 ?>
 
 <div class="container">
@@ -18,13 +22,16 @@ $functions->is_authorised(["customer"]);
                         <!-- Settings -->
                         <div class="col-xl-6 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
-                                <a href="/customer/settings">
+                                <a href="./index.php?content=pages/customer/settings&user_id=<?php echo $_SESSION['id']; ?>">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold  mb-1">
                                                 </div>
-                                                <div class="h5 mb-0 text-success text-uppercase font-weight-bold text-gray-800">Settings</div>
+                                                <div
+                                                    class="h5 mb-0 text-success text-uppercase font-weight-bold text-gray-800">
+                                                    Settings
+                                                </div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fa fa-user fa-2x text-gray-300"></i>
@@ -38,12 +45,12 @@ $functions->is_authorised(["customer"]);
                         <!-- Pending requests -->
                         <div class="col-xl-6 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
-                                <a href="/customer/bookings">
+                                <a href="./index.php?content=pages/customer/orders&user_id=<?php echo $_SESSION['id']; ?>">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Bookings
+                                                    Orders
                                                 </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                             </div>
@@ -53,58 +60,6 @@ $functions->is_authorised(["customer"]);
                                         </div>
                                     </div>
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-12 mb-4">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Notifications</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <table class="table">
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a href="/blog/1">
-                                                        Welcome to Boat Share!
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="/blog/2">
-                                                        New policies for hosts of Boat Share!
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="/blog/3">
-                                                        Checkout how you can earn more!
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="/blog/4">
-                                                        How to become a super host!
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <p>
-                                        <i>
-                                            *This card is for notifications such as updates of policies, booking updates, payouts and
-                                            more.
-                                        </i>
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </div>

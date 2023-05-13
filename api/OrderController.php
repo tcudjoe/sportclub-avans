@@ -4,6 +4,7 @@ namespace api;
 require_once './api/ConnectDb.php';
 require_once './api/SecurityFunctions.php';
 
+use mysql_xdevapi\Exception;
 use function SecurityFunctions\sanitize;
 
 class OrderController
@@ -35,9 +36,14 @@ class OrderController
         }
     }
 
-    public function getOrdersByUser($id){
-        $query = "SELECT * FROM orders WHERE user_id = '$id' ORDER BY order_date DESC";
-        $result = $this->conn->query($query);
+    public function getOrdersByUser($id)
+    {
+        $query = "SELECT * FROM orders WHERE user_id = ? ORDER BY order_date DESC";
+        $statement = $this->conn->prepare($query);
+        $statement->bind_param("s", $id);
+        $statement->execute();
+        $result = $statement->get_result();
+
         if ($result) {
             if ($result->num_rows > 0) {
                 $data = array();
@@ -46,10 +52,11 @@ class OrderController
                 }
                 return $data;
             } else {
-                echo "No found records";
+                echo "No records found";
             }
         } else {
-            echo "error in " . $query . "<br>" . $this->conn->error;
+            echo "Error executing query: " . $query . "<br>" . $this->conn->error;
         }
     }
+
 }

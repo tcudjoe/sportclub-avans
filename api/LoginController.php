@@ -49,17 +49,20 @@ class LoginController
 
                     switch ($record["userrole"]) {
                         case 'customer':
-                            header("Location: ./index.php?content=pages/customer/dashboard");
+                            $redirectUrl = "./index.php?content=pages/customer/dashboard&user_id=" . $record["id"];
+                            header("Location: " . $redirectUrl);
                             exit();
                             break;
 
                         case 'employee':
-                            header("Location: ./index.php?content=pages/employee/dashboard");
+                            $redirectUrl = "./index.php?content=pages/employee/dashboard&user_id=" . $record["id"];
+                            header("Location: " . $redirectUrl);
                             exit();
                             break;
 
-                        case 'customer':
-                            header("Location: ./index.php?content=pages/admin/dashboard");
+                        case 'admin':
+                            $redirectUrl = "./index.php?content=pages/admin/dashboard&user_id=" . $record["id"];
+                            header("Location: " . $redirectUrl);
                             exit();
                             break;
                     }
@@ -67,5 +70,6 @@ class LoginController
             }
         }
     }
+
 
 }

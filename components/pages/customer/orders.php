@@ -1,9 +1,18 @@
 <?php
+
+use api\OrderController;
+use api\SecurityFunctions;
+
 include 'api/SecurityFunctions.php';
-$functions = new \api\SecurityFunctions();
+$functions = new SecurityFunctions();
 
 $functions->is_authorised(["customer"]);
-//echo "Orders customer works!";
+
+require_once './api/OrderController.php';
+
+$object = new OrderController();
+$id = isset($_GET['user_id']) ? $_GET['user_id'] : '';
+//echo "User ID: " . $id . "<br>"; // Debug output
 ?>
 
 <div class="container">
@@ -27,29 +36,35 @@ $functions->is_authorised(["customer"]);
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">328431</th>
-                            <td>03/05/2023 12:30:00</td>
-                            <td>03/05/2023 18:30:00</td>
-                            <td>002305</td>
-                            <td>027602</td>
-                            <td>€650,45</td>
-                            <td>
-                                <a href="./index.php?content=pages/admin/orders&id=1">
-                                    <i aria-hidden="true" class="fa fa-ban"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="/index.php?content=pages/admin/edit-booking&id=1">
-                                    <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        <?php
+                        $orders = $object->getOrdersByUser($id);
+                        if (!empty($orders)) {
+                            foreach ($orders as $order) {
+                                ?>
+                                <tr>
+                                    <th scope="row"><?php echo $order['id'] ?></th>
+                                    <td><?php echo $order['order_date'] ?></td>
+                                    <td><?php echo $order['order_quantity'] ?></td>
+                                    <td><?php echo $order['user_id'] ?></td>
+                                    <td>€<?php echo $order['order_price'] ?></td>
+                                    <td>
+                                        <a href="./index.php?content=pages/customer/delete-order&id=<?php echo $order['id'] ?>
+                                        <i aria-hidden=" true" class="fa fa-ban"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/index.php?content=pages/customer/edit-order&id=<?php echo $order['id'] ?>">
+                                            <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php }
+                        } ?>
                         </tbody>
                     </table>
-                    <a href="./index.php?content=pages/admin/orders/add-order">
+                    <a href="./index.php?content=pages/customer/add-order">
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary"  type="button">Add new booking</button>
+                            <button class="btn btn-primary" type="button">Add new booking</button>
                         </div>
                     </a>
                 </div>
