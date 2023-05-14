@@ -49,12 +49,12 @@ $object = new UserController();
                                 <td><?php echo $customer['zipcode'] ?></td>
                                 <td><?php echo $customer['cityname'] ?></td>
                                 <td>
-                                    <a href="./index.php?content=pages/employee/delete-user&id=<?php echo $customer['id'] ?>
+                                    <a href="./index.php?content=pages/employee/delete-customer&id=<?php echo $customer['id'] ?>
                                         <i aria-hidden="true" class="fa fa-ban"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/index.php?content=pages/employee/edit-user&id=<?php echo $customer['id']?>">
+                                    <a href="/index.php?content=pages/employee/edit-customer&id=<?php echo $customer['id']?>">
                                         <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
                                     </a>
                                 </td>

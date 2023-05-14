@@ -125,4 +125,17 @@ switch ($alert) {
                Something went wrong, try again later.
           </div>';
         break;
+
+    case 'update-user-error-employee':
+        header("Refresh: 3.5; url=./index.php?content=pages/employee/users&user_id=". $id);
+        echo '<div class="alert alert-warning text-center container" role="alert">
+               Something went wrong while updating the user, try again later.
+          </div>';
+        break;
+    case 'update-user-success-employee':
+        header("Refresh: 3.5; url=./index.php?content=pages/employee/users&user_id=". $id);
+        echo '<div class="alert alert-warning text-center container" role="alert">
+               User successfully updated.
+          </div>';
+        break;
 }

@@ -85,4 +85,49 @@ class UserController
             echo "error in " . $query . "<br>" . $this->conn->error;
         }
     }
+
+    public function getUserById($id)
+    {
+        $query = "SELECT * FROM users WHERE id = ?";
+        $statement = $this->conn->prepare($query);
+        $statement->bind_param("s", $id);
+        $statement->execute();
+        $result = $statement->get_result();
+
+        if ($result) {
+            if ($result->num_rows > 0) {
+                $data = array();
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                return $data;
+            } else {
+                echo "No records found";
+            }
+        } else {
+            echo "Error executing query: " . $query . "<br>" . $this->conn->error;
+        }
+    }
+
+    public function putCustomer()
+    {
+        $id = $this->conn->real_escape_string($_POST['id']);
+        $firstname = $this->conn->real_escape_string($_POST['firstname']);
+        $surname = $this->conn->real_escape_string($_POST['surname']);
+        $email = $this->conn->real_escape_string($_POST['email']);
+        $password = $this->conn->real_escape_string($_POST['password']);
+        $address = $this->conn->real_escape_string($_POST['address']);
+        $zipcode = $this->conn->real_escape_string($_POST['zipcode']);
+        $cityname = $this->conn->real_escape_string($_POST['cityname']);
+        $userrole = $this->conn->real_escape_string($_POST['userrole']);
+
+        $query = "UPDATE users SET firstname = '$firstname', surname = '$surname', email = '$email', password = '$password', address = '$address', zipcode = '$zipcode', cityname = '$cityname', userrole = '$userrole' WHERE id = $id";
+        $sql = $this->conn->query($query);
+
+        if ($sql == true) {
+            header("Location: index.php?content=pages/messages&alert=update-user-success-employee");
+        } else {
+            header("Location: index.php?content=pages/messages&alert=update-user-error-employee");
+        }
+    }
 }
