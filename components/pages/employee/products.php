@@ -47,12 +47,12 @@ $products = $object->getProducts();
                                 <td><?php echo $product['quantity'] ?></td>
                                 <td><?php echo $product['category_id'] ?></td>
                                 <td>
-                                    <a href="./index.php?content=pages/employee/delete-user&id=1">
+                                    <a href="./index.php?content=pages/employee/delete-user&id=<?php echo $product['id'] ?>">
                                         <i aria-hidden="true" class="fa fa-ban"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/index.php?content=pages/employee/edit-user&id=1">
+                                    <a href="/index.php?content=pages/employee/edit-user&id=<?php echo $product['id'] ?>">
                                         <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
                                     </a>
                                 </td>
@@ -61,7 +61,7 @@ $products = $object->getProducts();
 
                         </tbody>
                     </table>
-                    <a href="./index.php?content=pages/employee/add-user">
+                    <a href="./index.php?content=pages/employee/add-user&user_id=<?php echo $_SESSION['id']; ?>">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary"  type="button">Add new booking</button>
                         </div>

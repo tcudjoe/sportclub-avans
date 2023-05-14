@@ -59,4 +59,19 @@ class OrderController
         }
     }
 
+    public function postOrder($post)
+    {
+        $user_id = $this->conn->real_escape_string($_POST['user_id']);
+        $order_date = $this->conn->real_escape_string($_POST['order_date']);
+        $order_price = $this->conn->real_escape_string($_POST['order_price']);
+        $quantity = $this->conn->real_escape_string($_POST['quantity']);
+        $query="INSERT INTO orders(user_id, order_date, order_price, order_quantity) VALUES('$user_id','$order_date','$order_price', $quantity)";
+        $sql = $this->conn->query($query);
+        if ($sql==true) {
+            header("Location: index.php?content=pages/messages&alert=form-success-employee");
+        }else{
+            header("Location: index.php?content=pages/messages&alert=form-error-employee");
+        }
+    }
+
 }

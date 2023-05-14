@@ -58,7 +58,7 @@ $orders = $object->getOrders();
                         <?php } ?>
                         </tbody>
                     </table>
-                    <a href="./index.php?content=pages/employee/add-order">
+                    <a href="./index.php?content=pages/employee/add-order&user_id='<?php echo $_SESSION["id"] ?>'">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" type="button">Add new booking</button>
                         </div>

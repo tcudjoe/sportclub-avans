@@ -1,5 +1,7 @@
 <?php
 use api\connectDb;
+session_start();
+session_gc();
 ?>
 <!doctype html>
 <html lang="en">
