@@ -130,4 +130,30 @@ class UserController
             header("Location: index.php?content=pages/messages&alert=update-user-error-employee");
         }
     }
+
+    public function deleteCustomer($customerId)
+    {
+        $query = "DELETE FROM users WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if ($stmt) {
+            $stmt->bind_param("i", $customerId);
+            if ($stmt->execute()) {
+                $stmt->close();
+                ob_end_clean();
+                header("Location: index.php?content=pages/messages&alert=delete-user-success-employee");
+                exit();
+            } else {
+                $stmt->close();
+                ob_end_clean();
+                header("Location: index.php?content=pages/messages&alert=delete-user-error-employee");
+                exit();
+            }
+        } else {
+            // Handle the case where the statement preparation failed
+            // You might want to log an error or display an error message
+            echo "Error executing query: " . $query . "<br>" . $this->conn->error;
+
+        }
+    }
 }

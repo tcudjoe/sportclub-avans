@@ -138,4 +138,18 @@ switch ($alert) {
                User successfully updated.
           </div>';
         break;
+
+    case 'delete-user-success-employee':
+        header("Refresh: 3.5; url=./index.php?content=pages/employee/users");
+        echo '<div class="alert alert-warning text-center container" role="alert">
+               User successfully deleted.
+          </div>';
+        break;
+
+    case 'delete-user-error-employee':
+        header("Refresh: 3.5; url=./index.php?content=pages/employee/users");
+        echo '<div class="alert alert-warning text-center container" role="alert">
+               User not updated. try again.
+          </div>';
+        break;
 }

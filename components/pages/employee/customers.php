@@ -10,7 +10,20 @@ $functions->is_authorised(["employee"]);
 
 require_once './api/OrderController.php';
 
+
 $object = new UserController();
+
+// Check if the delete action is triggered
+if (isset($_GET['action']) && $_GET['action'] === 'deleteCustomer') {
+    // Check if the order ID is provided
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        // Call the deleteOrder method
+        $object->deleteCustomer($id);
+        // Redirect to the appropriate page after deletion
+        exit();
+    }
+}
 ?>
 
 <div class="container">
@@ -49,7 +62,7 @@ $object = new UserController();
                                 <td><?php echo $customer['zipcode'] ?></td>
                                 <td><?php echo $customer['cityname'] ?></td>
                                 <td>
-                                    <a href="./index.php?content=pages/employee/delete-customer&id=<?php echo $customer['id'] ?>
+                                    <a href="?content=pages/employee/customers&action=deleteCustomer&id=<?php echo $customer['id'] ?>
                                         <i aria-hidden="true" class="fa fa-ban"></i>
                                     </a>
                                 </td>
