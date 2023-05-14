@@ -4,7 +4,6 @@ namespace api;
 require_once './api/ConnectDb.php';
 require_once './api/SecurityFunctions.php';
 
-use mysql_xdevapi\Exception;
 use function SecurityFunctions\sanitize;
 
 class OrderController
@@ -33,6 +32,29 @@ class OrderController
             }
         } else {
             echo "error in " . $query . "<br>" . $this->conn->error;
+        }
+    }
+
+    public function getOrdersById($id)
+    {
+        $query = "SELECT * FROM orders WHERE id = ?";
+        $statement = $this->conn->prepare($query);
+        $statement->bind_param("s", $id);
+        $statement->execute();
+        $result = $statement->get_result();
+
+        if ($result) {
+            if ($result->num_rows > 0) {
+                $data = array();
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                return $data;
+            } else {
+                echo "No records found";
+            }
+        } else {
+            echo "Error executing query: " . $query . "<br>" . $this->conn->error;
         }
     }
 
@@ -65,16 +87,17 @@ class OrderController
         $order_date = $this->conn->real_escape_string($_POST['order_date']);
         $order_price = $this->conn->real_escape_string($_POST['order_price']);
         $quantity = $this->conn->real_escape_string($_POST['quantity']);
-        $query="INSERT INTO orders(user_id, order_date, order_price, order_quantity) VALUES('$user_id','$order_date','$order_price', $quantity)";
+        $query = "INSERT INTO orders(user_id, order_date, order_price, order_quantity) VALUES('$user_id','$order_date','$order_price', $quantity)";
         $sql = $this->conn->query($query);
-        if ($sql==true) {
+        if ($sql == true) {
             header("Location: index.php?content=pages/messages&alert=form-success-employee");
-        }else{
+        } else {
             header("Location: index.php?content=pages/messages&alert=form-error-employee");
         }
     }
 
-    public function deleteOrder($orderId) {
+    public function deleteOrder($orderId)
+    {
         $query = "DELETE FROM orders WHERE id = ?";
         $stmt = $this->conn->prepare($query);
 
@@ -96,6 +119,25 @@ class OrderController
             // You might want to log an error or display an error message
             echo "Error executing query: " . $query . "<br>" . $this->conn->error;
 
+        }
+    }
+
+
+    public function putOrders()
+    {
+        $id = $this->conn->real_escape_string($_POST['id']);
+        $user_id = $this->conn->real_escape_string($_POST['user_id']);
+        $order_date = $this->conn->real_escape_string($_POST['order_date']);
+        $order_price = $this->conn->real_escape_string($_POST['order_price']);
+        $quantity = $this->conn->real_escape_string($_POST['quantity']);
+
+        $query = "UPDATE orders SET user_id = '$user_id', order_date = '$order_date', order_price='$order_price', order_quantity = $quantity WHERE id = $id";
+        $sql = $this->conn->query($query);
+
+        if ($sql == true) {
+            header("Location: index.php?content=pages/messages&alert=update-order-success-employee");
+        } else {
+            header("Location: index.php?content=pages/messages&alert=update-order-error-employee");
         }
     }
 
