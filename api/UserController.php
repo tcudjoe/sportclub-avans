@@ -48,6 +48,25 @@ class UserController
         }
     }
 
+    public function postUser($post)
+    {
+        $firstname = $this->conn->real_escape_string($_POST['firstname']);
+        $surname = $this->conn->real_escape_string($_POST['surname']);
+        $email = $this->conn->real_escape_string($_POST['email']);
+        $password = $this->conn->real_escape_string($_POST['password']);
+        $address = $this->conn->real_escape_string($_POST['address']);
+        $zipcode = $this->conn->real_escape_string($_POST['zipcode']);
+        $cityname = $this->conn->real_escape_string($_POST['cityname']);
+        $userrole = $this->conn->real_escape_string($_POST['userrole']);
+        $query = "INSERT INTO users (firstname, surname, email, password, address, zipcode, cityname, userrole) VALUES('$firstname','$surname','$email', '$password', '$address', '$zipcode', '$cityname', '$userrole')";
+        $sql = $this->conn->query($query);
+        if ($sql == true) {
+            header("Location: index.php?content=pages/messages&alert=create-user-success-employee");
+        } else {
+            header("Location: index.php?content=pages/messages&alert=create-user-error-employee");
+        }
+    }
+
     public function getCustomers()
     {
         $query = "SELECT * FROM users WHERE userrole = 'customer' ORDER BY firstname ASC";

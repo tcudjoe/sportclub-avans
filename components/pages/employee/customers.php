@@ -62,7 +62,7 @@ $object = new UserController();
                         <?php } ?>
                         </tbody>
                     </table>
-                    <a href="./index.php?content=pages/employee/add-user">
+                    <a href="./index.php?content=pages/employee/add-customer">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary"  type="button">Add user</button>
                         </div>
