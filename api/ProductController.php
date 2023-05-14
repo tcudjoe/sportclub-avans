@@ -72,4 +72,30 @@ class ProductController
             echo "error in ".$query."<br>".$this->conn->error;
         }
     }
+
+    public function deleteProduct($productId)
+    {
+        $query = "DELETE FROM products WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if ($stmt) {
+            $stmt->bind_param("i", $productId);
+            if ($stmt->execute()) {
+                $stmt->close();
+                ob_end_clean();
+                header("Location: index.php?content=pages/messages&alert=delete-product-success-employee");
+                exit();
+            } else {
+                $stmt->close();
+                ob_end_clean();
+                header("Location: index.php?content=pages/messages&alert=delete-product-error-employee");
+                exit();
+            }
+        } else {
+            // Handle the case where the statement preparation failed
+            // You might want to log an error or display an error message
+            echo "Error executing query: " . $query . "<br>" . $this->conn->error;
+
+        }
+    }
 }
