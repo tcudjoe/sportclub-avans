@@ -85,4 +85,18 @@ switch ($alert) {
           </div>';
         break;
 
+    case 'order-deleted-success-employee':
+        header("Refresh: 3.5; url=./index.php?content=pages/employee/orders&user_id=" . $id);
+        echo '<div class="alert alert-success text-center container" role="alert">
+                You have successfully added an order.
+              </div>';
+        break;
+
+    case 'order-deleted-error-employee':
+        header("Refresh: 3.5; url=./index.php?content=pages/employee/orders&user_id=" . $id);
+        echo '<div class="alert alert-success text-center container" role="alert">
+               Something went wrong, try again later.
+          </div>';
+        break;
+
 }

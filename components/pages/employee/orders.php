@@ -1,16 +1,29 @@
 <?php
 use api\SecurityFunctions;
-include 'api/SecurityFunctions.php';
-$functions = new SecurityFunctions();
+require_once 'api/SecurityFunctions.php';
 
+$functions = new SecurityFunctions();
 $functions->is_authorised(["employee"]);
 
 use api\OrderController;
-
-require_once './api/OrderController.php';
+require_once 'api/OrderController.php';
 
 $object = new OrderController();
+
+// Check if the delete action is triggered
+if (isset($_GET['action']) && $_GET['action'] === 'deleteOrder') {
+    // Check if the order ID is provided
+    if (isset($_GET['id'])) {
+        $orderId = $_GET['id'];
+        // Call the deleteOrder method
+        $object->deleteOrder($orderId);
+        // Redirect to the appropriate page after deletion
+        exit();
+    }
+}
+
 $orders = $object->getOrders();
+
 ?>
 
 <div class="container">
@@ -45,12 +58,12 @@ $orders = $object->getOrders();
                                 <td><?php echo $order['user_id'] ?></td>
                                 <td>€<?php echo $order['order_price'] ?></td>
                                 <td>
-                                    <a href="./index.php?content=pages/employee/delete-order&id=<?php echo $order['id'] ?>
+                                    <a href="?content=pages/employee/orders&action=deleteOrder&id=<?php echo $order['id']; ?>">
                                         <i aria-hidden="true" class="fa fa-ban"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/index.php?content=pages/employee/edit-order&id=<?php echo $order['id']?>">
+                                    <a href="./index.php?content=pages/employee/edit-order&id=<?php echo $order['id']; ?>">
                                         <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
                                     </a>
                                 </td>
