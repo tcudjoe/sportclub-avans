@@ -34,7 +34,6 @@ if (isset($_POST['submit'])) {
                             <label for="signupHeader">yup</label>
                         </div>
                         <?php
-
                         if (isset($_GET['id']) && !empty($_GET['id'])) {
                             $editOrder = $_GET['id'];
                             $order = $objectOrder->getOrdersById($editOrder)[0];
@@ -48,10 +47,9 @@ if (isset($_POST['submit'])) {
                             <div class="mb-3">
                                 <label for="inputSurname" class="form-label">Order date:</label>
                                 <input type="date" required class="form-control" id="inputSurname" placeholder="Doe"
-                                       name="order_date" value="<?php echo date('Y-m-d', strtotime($order['order_date'])) ?>">
+                                       name="order_date"
+                                       value="<?php echo date('Y-m-d', strtotime($order['order_date'])) ?>">
                             </div>
-
-
                             <div class="input-group mb-3">
                                 <label for="inputEmail" class="form-label float-left">order price:</label>
                                 <span class="input-group-text" id="basic-addon1">€</span>
