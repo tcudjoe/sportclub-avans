@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <form method="POST" action="index.php?content=pages/employee/products">
+                <form method="POST" action="index.php?content=pages/employee/add-product">
                     <div class="card">
                         <div class="text-center signupHeader">
                             <h1 id="signupHeader">Be a part of DSM Supermarkt!</h1>

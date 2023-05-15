@@ -117,45 +117,54 @@ class ProductController
     public function postProduct($post)
     {
         $name = $this->conn->real_escape_string($_POST['name']);
-        $descripiton = $this->conn->real_escape_string($_POST['description']);
-        $img_address = $this->conn->real_escape_string($_POST['img_address']);
-        $price = $this->conn->real_escape_string($_POST['price']);
-        $quantity = $this->conn->real_escape_string($_POST['quantity']);
-        $category = $this->conn->real_escape_string($_POST['category']);
-
-        $query = "INSERT INTO products (name, description, img_address, price, quantity, category_id) VALUES('$name','$descripiton','$img_address', '$price', '$quantity', '$category')";
-        $sql = $this->conn->query($query);
-
-        if ($sql == true) {
-            header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
-        } else {
-            header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
-        }
-    }
-
-    public function putProduct()
-    {
-        $id = $this->conn->real_escape_string($_POST['id']);
-        $name = $this->conn->real_escape_string($_POST['name']);
         $description = $this->conn->real_escape_string($_POST['description']);
         $img_address = $this->conn->real_escape_string($_POST['img_address']);
         $price = $this->conn->real_escape_string($_POST['price']);
         $quantity = $this->conn->real_escape_string($_POST['quantity']);
         $category = $this->conn->real_escape_string($_POST['category']);
 
-        $query = "UPDATE products SET name=?, description=?, img_address=?, price=?, quantity=?, category_id=? WHERE id=?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("sssdiii", $name, $description, $img_address, $price, $quantity, $category, $id);
+        $query = "INSERT INTO products (name, description, img_address, price, quantity, category_id) VALUES ('$name', '$description', '$img_address', $price, $quantity, $category)";
+        $sql = $this->conn->query($query);
 
-        $sql = $stmt->execute();
-
-        if ($sql === true) {
-            var_dump($sql, $query, $id);
+        if ($sql == true) {
+            var_dump($sql, $query);
             header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
         } else {
-            var_dump($sql, $query, $id);
+            var_dump($sql, $query);
             header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
         }
+    }
+
+
+    public function putProduct()
+    {
+        try {
+            // your database query here
+            $id = $this->conn->real_escape_string($_POST['id']);
+            $name = $this->conn->real_escape_string($_POST['name']);
+            $description = $this->conn->real_escape_string($_POST['description']);
+            $img_address = $this->conn->real_escape_string($_POST['img_address']);
+            $price = $this->conn->real_escape_string($_POST['price']);
+            $quantity = $this->conn->real_escape_string($_POST['quantity']);
+            $category = $this->conn->real_escape_string($_POST['category']);
+
+            $query = "UPDATE products SET name=?, description=?, img_address=?, price=?, quantity=?, category_id=? WHERE id=?";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("sssdiii", $name, $description, $img_address, $price, $quantity, $category, $id);
+
+            $sql = $stmt->execute();
+
+            if ($sql === true) {
+                var_dump($sql, $query, $id);
+                header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
+            } else {
+                var_dump($sql, $query, $id);
+                header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
+            }
+        } catch (\mysqli_sql_exception $e) {
+            echo $e->getMessage(); // print the error message
+        }
+
     }
 
 
