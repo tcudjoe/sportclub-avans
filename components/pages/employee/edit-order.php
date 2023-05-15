@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
                                    value="<?php echo $order['order_quantity'] ?>"
                                    aria-describedby="emailHelp" placeholder="john@doe.com" name="quantity">
                         </div>
-                        <input type="hidden" name="id" value="<?php echo $order['order_quantity'] ?>"/>
+                        <input type="hidden" name="id" value="<?php echo $order['id'] ?>"/>
                         <input type="submit" name="submit" class="btn btn-primary" value="Add order"/>
                     </div>
                     <?php } ?>
