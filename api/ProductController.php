@@ -135,6 +135,22 @@ class ProductController
         }
     }
 
+    public function getCount($table)
+    {
+        // Assuming you already have a valid database connection ($conn)
+        $query = "SELECT COUNT(*) as count FROM $table";
+        $result = $this->conn->query($query);
+
+        if ($result) {
+            $row = $result->fetch_assoc();
+            $count = $row['count'];
+            return $count;
+        } else {
+            return 0; // Return 0 if there is an error retrieving the count
+        }
+    }
+
+
 
     public function putProduct()
     {
@@ -157,12 +173,12 @@ class ProductController
             if ($sql === true) {
                 var_dump($sql, $query, $id);
                 header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
-            } else {
-                var_dump($sql, $query, $id);
-                header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
             }
         } catch (\mysqli_sql_exception $e) {
-            echo $e->getMessage(); // print the error message
+            var_dump($sql, $query, $id);
+            header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
+
+            echo var_dump($e->getMessage()); // print the error message
         }
 
     }

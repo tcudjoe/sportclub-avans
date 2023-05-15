@@ -1,6 +1,12 @@
 <?php
+
+use api\ProductController;
+use api\SecurityFunctions;
+
 include 'api/SecurityFunctions.php';
-$functions = new \api\SecurityFunctions();
+$functions = new SecurityFunctions();
+
+$object = new ProductController();
 
 $functions->is_authorised(["employee"]);
 ?>
@@ -28,6 +34,7 @@ $functions->is_authorised(["employee"]);
                                                     class="h5 mb-0 text-success text-uppercase font-weight-bold text-gray-800">
                                                     Users
                                                 </div>
+
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fa fa-users fa-2x text-gray-300"></i>
@@ -48,16 +55,18 @@ $functions->is_authorised(["employee"]);
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                     Orders
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                                <div
+                                                    class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $object->getCount('orders'); ?></div>
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-calender fa-2x text-gray-300"></i>
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         </div>
+
 
                         <div class="col-xl-6 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
@@ -68,7 +77,9 @@ $functions->is_authorised(["employee"]);
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                     Products
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                                <div
+                                                    class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $object->getCount('products'); ?></div>
+
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-cart fa-2x text-gray-300"></i>

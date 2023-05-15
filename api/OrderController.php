@@ -1,5 +1,4 @@
 <?php
-
 namespace api;
 require_once './api/ConnectDb.php';
 require_once './api/SecurityFunctions.php';
@@ -87,11 +86,17 @@ class OrderController
         $order_date = $this->conn->real_escape_string($_POST['order_date']);
         $order_price = $this->conn->real_escape_string($_POST['order_price']);
         $quantity = $this->conn->real_escape_string($_POST['quantity']);
-        $query = "INSERT INTO orders(user_id, order_date, order_price, order_quantity) VALUES('$user_id','$order_date','$order_price', $quantity)";
+
+        $query = "INSERT INTO orders(user_id, order_date, order_price, order_quantity) VALUES('$user_id','$order_date',$order_price, $quantity)";
         $sql = $this->conn->query($query);
+
         if ($sql == true) {
+//            var_dump($sql, $query);
+
             header("Location: index.php?content=pages/messages&alert=form-success-employee");
         } else {
+//            var_dump($sql, $query);
+
             header("Location: index.php?content=pages/messages&alert=form-error-employee");
         }
     }
@@ -104,15 +109,11 @@ class OrderController
         if ($stmt) {
             $stmt->bind_param("i", $orderId);
             if ($stmt->execute()) {
-                $stmt->close();
-                ob_end_clean();
                 header("Location: index.php?content=pages/messages&alert=order-deleted-success-employee");
-                exit();
-            } else {
                 $stmt->close();
-                ob_end_clean();
+            } else {
                 header("Location: index.php?content=pages/messages&alert=order-deleted-error-employee");
-                exit();
+                $stmt->close();
             }
         } else {
             // Handle the case where the statement preparation failed
@@ -121,7 +122,6 @@ class OrderController
 
         }
     }
-
 
     public function putOrders()
     {
@@ -135,11 +135,11 @@ class OrderController
         $sql = $this->conn->query($query);
 
         if ($sql == true) {
+            var_dump($sql, $query);
             header("Location: index.php?content=pages/messages&alert=update-order-success-employee");
         } else {
+            var_dump($sql, $query);
             header("Location: index.php?content=pages/messages&alert=update-order-error-employee");
         }
     }
-
-
 }

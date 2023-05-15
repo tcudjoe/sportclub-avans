@@ -1,4 +1,5 @@
 <?php
+ob_start();
 use api\connectDb;
 session_start();
 session_gc();
