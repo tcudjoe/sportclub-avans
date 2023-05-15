@@ -3,9 +3,16 @@ use api\SecurityFunctions;
 use api\UserController;
 
 include 'api/SecurityFunctions.php';
-$functions = new SecurityFunctions();
+require_once 'api/ProductController.php';
 
+$functions = new SecurityFunctions();
 $functions->is_authorised(["employee"]);
+
+$objectProd = new \api\ProductController();
+
+if (isset($_POST['submit'])) {
+    $objectProd->putProducts();
+}
 ?>
 
 <div class="bg-image">

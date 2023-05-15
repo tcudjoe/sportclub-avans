@@ -73,6 +73,43 @@ class ProductController
         }
     }
 
+    public function getCategory(){
+        $query = "SELECT * FROM category";
+        $result = $this->conn->query($query);
+        if ($result) {
+            if ($result->num_rows > 0) {
+                $data = array();
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                return $data;
+            } else {
+                echo "No found records";
+            }
+        } else {
+            echo "error in " . $query . "<br>" . $this->conn->error;
+        }
+    }
+
+    public function postProduct($post)
+    {
+        $name = $this->conn->real_escape_string($_POST['name']);
+        $descripiton = $this->conn->real_escape_string($_POST['description']);
+        $img_address = $this->conn->real_escape_string($_POST['img_address']);
+        $price = $this->conn->real_escape_string($_POST['price']);
+        $quantity = $this->conn->real_escape_string($_POST['quantity']);
+        $category = $this->conn->real_escape_string($_POST['category']);
+
+        $query = "INSERT INTO products (name, description, img_address, price, quantity, category_id) VALUES('$name','$descripiton','$img_address', '$price', '$quantity', '$category')";
+        $sql = $this->conn->query($query);
+
+        if ($sql == true) {
+            header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
+        } else {
+            header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
+        }
+    }
+
     public function deleteProduct($productId)
     {
         $query = "DELETE FROM products WHERE id = ?";

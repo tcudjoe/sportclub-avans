@@ -10,6 +10,8 @@ $functions->is_authorised(["employee"]);
 $object = new ProductController();
 $products = $object->getProducts();
 
+
+
 // Check if the delete action is triggered
 if (isset($_GET['action']) && $_GET['action'] === 'deleteProduct') {
     // Check if the order ID is provided
@@ -55,7 +57,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'deleteProduct') {
                                 <th scope="row"><?php echo $product['id'] ?></th>
                                 <td><?php echo $product['name'] ?></td>
                                 <td><?php echo mb_strimwidth($product['description'], 0, 20, "...")  ?></td>
-                                <td><?php echo $product['img_address'] ?></td>
+                                <td><?php echo mb_strimwidth($product['img_address'], 0, 20, "...") ?></td>
                                 <td><?php echo $product['price'] ?></td>
                                 <td><?php echo $product['quantity'] ?></td>
                                 <td><?php echo $product['category_id'] ?></td>
@@ -65,7 +67,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'deleteProduct') {
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/index.php?content=pages/employee/edit-user&id=<?php echo $product['id'] ?>">
+                                    <a href="/index.php?content=pages/employee/edit-product&id=<?php echo $product['id'] ?>">
                                         <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
                                     </a>
                                 </td>
@@ -74,7 +76,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'deleteProduct') {
 
                         </tbody>
                     </table>
-                    <a href="./index.php?content=pages/employee/add-user&user_id=<?php echo $_SESSION['id']; ?>">
+                    <a href="./index.php?content=pages/employee/add-product&user_id=<?php echo $_SESSION['id']; ?>">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary"  type="button">Add new booking</button>
                         </div>

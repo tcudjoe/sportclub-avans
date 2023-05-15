@@ -167,4 +167,18 @@ switch ($alert) {
           </div>';
         break;
 
+    case 'create-product-success-employee':
+        header("Refresh: 3.5; url=./index.php?content=pages/employee/users");
+        echo '<div class="alert alert-warning text-center container" role="alert">
+               good good
+          </div>';
+        break;
+
+    case 'create-product-error-employee':
+        header("Refresh: 3.5; url=./index.php?content=pages/employee/users");
+        echo '<div class="alert alert-warning text-center container" role="alert">
+               bad
+          </div>';
+        break;
+
 }
