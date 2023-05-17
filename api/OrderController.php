@@ -163,6 +163,7 @@ class OrderController
 
     public function putOrders()
     {
+        $userrole = $this->conn->real_escape_string($_POST["userrole"]);
         $id = $this->conn->real_escape_string($_POST['id']);
         $user_id = $this->conn->real_escape_string($_POST['user_id']);
         $order_date = $this->conn->real_escape_string($_POST['order_date']);
@@ -173,11 +174,21 @@ class OrderController
         $sql = $this->conn->query($query);
 
         if ($sql == true) {
-            var_dump($sql, $query);
-            header("Location: index.php?content=pages/messages&alert=update-order-success-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=update-order-success-employee");
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=update-order-success-admin");
+            } else {
+                header("Location: index.php?content=pages/messages&alert=update-order-success-customer");
+            }
         } else {
-            var_dump($sql, $query);
-            header("Location: index.php?content=pages/messages&alert=update-order-error-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=update-order-error-employee");
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=update-order-error-admin");
+            } else {
+                header("Location: index.php?content=pages/messages&alert=update-order-error-customer");
+            }
         }
     }
 }

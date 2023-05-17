@@ -45,7 +45,7 @@ $orders = $object->getOrders();
                                 <td><?php echo $order['user_id'] ?></td>
                                 <td>€<?php echo $order['order_price'] ?></td>
                                 <td>
-                                    <a href="./index.php?content=pages/admin/delete-order&id=<?php echo $order['id'] ?>
+                                    <a href="?content=pages/admin/orders&action=deleteOrder&id=<?php echo $order['id'] ?>
                                         <i aria-hidden="true" class="fa fa-ban"></i>
                                     </a>
                                 </td>
@@ -58,7 +58,7 @@ $orders = $object->getOrders();
                         <?php } ?>
                         </tbody>
                     </table>
-                    <a href="./index.php?content=pages/admin/orders/add-order">
+                    <a href="./index.php?content=pages/admin/add-order">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" type="button">Add new booking</button>
                         </div>

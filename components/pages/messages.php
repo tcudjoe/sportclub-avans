@@ -319,4 +319,40 @@ switch ($alert) {
         </div>
         <?php
         break;
+
+    case 'update-order-error-customer':
+        header("Refresh: 3.5; ./index.php?content=pages/customer/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
+
+    case 'update-order-success-customer':
+        header("Refresh: 3.5; ./index.php?content=pages/customer/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            good
+        </div>
+        <?php
+        break;
+
+    case 'update-order-error-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/customer/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
+
+    case 'update-order-success-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/customer/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            good
+        </div>
+        <?php
+        break;
 }
