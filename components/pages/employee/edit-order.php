@@ -64,6 +64,7 @@ if (isset($_POST['submit'])) {
                                    aria-describedby="emailHelp" placeholder="john@doe.com" name="quantity">
                         </div>
                         <input type="hidden" name="id" value="<?php echo $order['id'] ?>"/>
+                        <input type="hidden" name="userrole" value="<?php echo $_SESSION['userrole']; ?>">
                         <input type="submit" name="submit" class="btn btn-primary" value="Add order"/>
                     </div>
                     <?php } ?>
