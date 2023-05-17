@@ -16,16 +16,16 @@ $category_id = $_GET['category_id'];
             $products = $object->getCategoryProducts($category_id);
             foreach ($products as $product) {
                 ?>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 d-flex justify-content-center">
                     <div class="card" style="width: 18rem;">
                         <img src="./img/productimg<?php echo $product['img_address'] ?>" class="card-img-top"
                              alt="<?php echo $product['name'] ?>">
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?php echo $product['name'] ?></h5>
                             <p class="card-text"><?php echo $product['description'] ?></p>
                             <p class="card-text">€<?php echo $product['price'] ?></p>
-                            <a href="product-info.php?id=<?php echo $product['id'] ?>" class="btn btn-primary">More info</a>
-                            <a href="product-info.php?id=<?php echo $product['id'] ?>" class="btn btn-primary">Add to cart <i class="fa fa-cart-shopping"></i></a>
+                            <a href="index.php?content=pages/product-info&id=<?php echo $product['id'] ?>" class="btn btn-primary mt-auto float-start">More info</a>
+                            <a href="index.php?id=<?php echo $product['id'] ?>" class="btn btn-primary mt-2 float-end">Add to cart <i class="fa fa-cart-shopping"></i></a>
                         </div>
                     </div>
                 </div>
