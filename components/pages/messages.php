@@ -18,7 +18,6 @@ switch ($alert) {
     case 'password-mismatch':
         header("Refresh: 3.5; ./index.php?content=pages/register-page");
         ?>
-
         <div class="alert alert-warning text-center container" role="alert">
             Passwords did not match. Try again.
         </div>
@@ -110,7 +109,6 @@ switch ($alert) {
     case 'form-error-employee':
         header("Refresh: 3.5; ./index.php?content=pages/employee/orders");
         ?>
-
         <div class="alert alert-success text-center container" role="alert">
             Something went wrong, try again later.
         </div>
@@ -151,13 +149,13 @@ switch ($alert) {
         ?>
 
         <div class="alert alert-danger text-center container" role="alert">
-           Order was not updated, try again later.
+            Order was not updated, try again later.
         </div>
         <?php
         break;
 
     case 'create-user-success-employee':
-        header("Refresh: 3.5; ./index.php?content=pages/employee/users");
+        header("Refresh: 3.5; ./index.php?content=pages/employee/customers");
         ?>
         <div class="alert alert-success text-center container" role="alert">
             User created successfully.
@@ -168,7 +166,6 @@ switch ($alert) {
     case 'create-user-error-employee':
         header("Refresh: 3.5; ./index.php?content=pages/employee/users");
         ?>
-
         <div class="alert alert-warning text-center container" role="alert">
             user was not created, try again later.
         </div>
@@ -178,7 +175,6 @@ switch ($alert) {
     case 'update-user-error-employee':
         header("Refresh: 3.5; ./index.php?content=pages/employee/users&user_id=" . $id);
         ?>
-
         <div class="alert alert-warning text-center container" role="alert">
             Something went wrong while updating the user, try again later.
         </div>
@@ -188,7 +184,6 @@ switch ($alert) {
     case 'update-user-success-employee':
         header("Refresh: 3.5; ./index.php?content=pages/employee/users&user_id=" . $id);
         ?>
-
         <div class="alert alert-warning text-center container" role="alert">
             User successfully updated.
         </div>
@@ -198,7 +193,6 @@ switch ($alert) {
     case 'delete-user-success-employee':
         header("Refresh: 3.5; ./index.php?content=pages/employee/users");
         ?>
-
         <div class="alert alert-warning text-center container" role="alert">
             User successfully deleted.
         </div>
@@ -208,7 +202,6 @@ switch ($alert) {
     case 'delete-user-error-employee':
         header("Refresh: 3.5; ./index.php?content=pages/employee/users");
         ?>
-
         <div class="alert alert-warning text-center container" role="alert">
             User not updated. try again.
         </div>
@@ -229,7 +222,7 @@ switch ($alert) {
         header("Refresh: 3.5; ./index.php?content=pages/employee/users");
         ?>
 
-        <div class="alert alert-warning text-center container" role="alert">
+        <div class="alert alert-success text-center container" role="alert">
             good
         </div>
         <?php
@@ -239,7 +232,7 @@ switch ($alert) {
         header("Refresh: 3.5; ./index.php?content=pages/employee/users");
         ?>
 
-        <div class="alert alert-warning text-center container" role="alert">
+        <div class="alert alert-success text-center container" role="alert">
             good good
         </div>
         <?php
@@ -249,10 +242,81 @@ switch ($alert) {
         header("Refresh: 3.5; ./index.php?content=pages/employee/users");
         ?>
 
-        <div class="alert alert-warning text-center container" role="alert">
+        <div class="alert alert-danger text-center container" role="alert">
             bad
         </div>
         <?php
         break;
 
+    case 'form-success-customer':
+        header("Refresh: 3.5; ./index.php?content=pages/customer/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            good
+        </div>
+        <?php
+        break;
+
+    case 'form-error-customer':
+        header("Refresh: 3.5; ./index.php?content=pages/customer/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-danger text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
+
+    case 'form-success-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            good
+        </div>
+        <?php
+        break;
+
+    case 'form-error-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-danger text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
+
+    case 'delete-order-success-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            good
+        </div>
+        <?php
+        break;
+
+    case 'delete-order-error-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
+
+    case 'delete-order-success-customer':
+        header("Refresh: 3.5; ./index.php?content=pages/customer/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            good
+        </div>
+        <?php
+        break;
+
+    case 'delete-order-error-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
 }

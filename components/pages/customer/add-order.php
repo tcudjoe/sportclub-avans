@@ -1,11 +1,23 @@
 <?php
+
+use api\OrderController;
 use api\SecurityFunctions;
-use api\UserController;
 
 include 'api/SecurityFunctions.php';
-$functions = new SecurityFunctions();
+include 'api/OrderController.php';
 
+$functions = new SecurityFunctions();
 $functions->is_authorised(["customer"]);
+
+$object = new OrderController();
+
+// Insert Record in contact table
+if (isset($_POST['submit'])) {
+    $object->postOrder($_POST);
+//    var_dump($object, exit());
+}else {
+    echo "Error executing query";
+}
 ?>
 
 
@@ -13,60 +25,34 @@ $functions->is_authorised(["customer"]);
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <form method="POST" action="index.php?content=pages/register-page">
+                <form method="POST" action="index.php?content=pages/customer/add-order&user_id=<?php echo $_SESSION['id']; ?>">
                     <div class="card">
                         <div class="text-center signupHeader">
-                            <h1 id="signupHeader">Be a part of DSM Supermarkt!</h1>
-                            <label for="signupHeader">Sign up now to order groceries</label>
+                            <h1 id="signupHeader">Add order!</h1>
+                            <label for="signupHeader">okay</label>
                         </div>
                         <div class="mb-3">
-                            <label for="inputFirstname" class="form-label">First Name:</label>
-                            <input type="text" id="firstname" class="form-control" placeholder="John" name="firstname"
-                                   required>
+                            <label for="inputSurname" class="form-label">Order date:</label>
+                            <input type="date" required class="form-control" id="inputSurname" placeholder="Doe"
+                                   name="order_date" value="<?php echo date('Y-m-d'); ?>" disabled>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label for="inputEmail" class="form-label float-left">order price:</label>
+                            <span class="input-group-text" id="basic-addon1">€</span>
+                            <input type="number" required class="form-control" id="order_price"
+                                   aria-describedby="order_price" placeholder="56" name="order_price">
                         </div>
                         <div class="mb-3">
-                            <label for="inputSurname" class="form-label">Surname:</label>
-                            <input type="text" required class="form-control" id="inputSurname" placeholder="Doe"
-                                   name="surname">
+                            <label for="inputAddress" class="form-label">quantity of products:</label>
+                            <input type="number" required class="form-control" id="inputAddress"
+                                   aria-describedby="emailHelp" placeholder="20" name="quantity">
                         </div>
-                        <div class="mb-3">
-                            <label for="inputEmail" class="form-label float-left">Email address:</label>
-                            <input type="email" required class="form-control" id="inputEmail"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputAddress" class="form-label float-left">Address:</label>
-                            <input type="text" required class="form-control" id="inputAddress"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="address">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputZipcode" class="form-label float-left">Zipcode:</label>
-                            <input type="text" required class="form-control" id="inputZipcode"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="zipcode">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputCityname" class="form-label float-left">Cityname:</label>
-                            <input type="text" required class="form-control" id="inputCityname"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="cityname">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputPassword" class="form-label float-left">Password:</label>
-                            <input type="password" class="form-control" id="inputDateOfBirth"
-                                   aria-describedby="emailHelp"
-                                   name="password">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputConfirmPassword" class="form-label float-left">Re-enter Password:</label>
-                            <input type="password" class="form-control" id="inputDateOfBirth"
-                                   aria-describedby="emailHelp"
-                                   name="confirmPassword">
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
-                            <label class="form-label text-center">By clicking on sign up, you agree to our terms &
-                                conditions.</label>
-                        </div>
-                        <input type="submit" name="submit" class="btn btn-primary" value="Sign up"/>
+
+                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>"/>
+                        <input type="hidden" name="userrole" value="<?php echo $_SESSION['userrole']; ?>">
+
+                        <input type="submit" name="submit" class="btn btn-primary" value="Add order"/>
                     </div>
                 </form>
             </div>

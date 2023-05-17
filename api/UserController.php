@@ -25,7 +25,7 @@ class UserController
             // Destroys session
             session_destroy();
 
-            header("Location: ./index.php?content=messages&alert=logout-success");
+            header("Location: ./index.php?content=pages/messages&alert=logout-success");
         }
     }
 

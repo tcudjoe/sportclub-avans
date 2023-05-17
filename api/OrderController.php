@@ -1,4 +1,5 @@
 <?php
+
 namespace api;
 require_once './api/ConnectDb.php';
 require_once './api/SecurityFunctions.php';
@@ -82,6 +83,7 @@ class OrderController
 
     public function postOrder($post)
     {
+        $userrole = $this->conn->real_escape_string($_GET["userrole"]);
         $user_id = $this->conn->real_escape_string($_POST['user_id']);
         $order_date = $this->conn->real_escape_string($_POST['order_date']);
         $order_price = $this->conn->real_escape_string($_POST['order_price']);
@@ -91,34 +93,71 @@ class OrderController
         $sql = $this->conn->query($query);
 
         if ($sql == true) {
-//            var_dump($sql, $query);
-
-            header("Location: index.php?content=pages/messages&alert=form-success-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=form-success-employee");
+                var_dump($query, $sql, exit());
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=form-success-admin");
+                var_dump($query, $sql, exit());
+            } else {
+                header("Location: index.php?content=pages/messages&alert=form-success-customer");
+                var_dump($query, $sql, exit());
+            }
         } else {
-//            var_dump($sql, $query);
-
-            header("Location: index.php?content=pages/messages&alert=form-error-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=form-error-employee");
+                var_dump($query, $sql, exit());
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=form-error-admin");
+                var_dump($query, $sql, exit());
+            } else {
+                header("Location: index.php?content=pages/messages&alert=form-error-customer");
+                var_dump($query, $sql, exit());
+            }
         }
     }
 
     public function deleteOrder($orderId)
     {
+        $userrole = $this->conn->real_escape_string($_GET["userrole"]);
+
         $query = "DELETE FROM orders WHERE id = ?";
         $stmt = $this->conn->prepare($query);
 
         if ($stmt) {
             $stmt->bind_param("i", $orderId);
             if ($stmt->execute()) {
-                header("Location: index.php?content=pages/messages&alert=order-deleted-success-employee");
+                if ($userrole == "employee") {
+                    header("Location: index.php?content=pages/messages&alert=delete-order-success-employee");
+                } else if ($userrole == "admin") {
+                    header("Location: index.php?content=pages/messages&alert=delete-order-success-admin");
+                } else {
+                    header("Location: index.php?content=pages/messages&alert=delete-order-success-customer");
+                }
                 $stmt->close();
             } else {
-                header("Location: index.php?content=pages/messages&alert=order-deleted-error-employee");
+                if ($userrole == "employee") {
+                    header("Location: index.php?content=pages/messages&alert=delete-order-error-employee");
+                } else if ($userrole == "admin") {
+                    header("Location: index.php?content=pages/messages&alert=delete-order-error-admin");
+                } else {
+                    header("Location: index.php?content=pages/messages&alert=delete-order-error-customer");
+                }
                 $stmt->close();
             }
         } else {
             // Handle the case where the statement preparation failed
             // You might want to log an error or display an error message
-            echo "Error executing query: " . $query . "<br>" . $this->conn->error;
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=delete-order-error-employee");
+                echo "Error executing query: " . $query . "<br>" . $this->conn->error;
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=delete-order-error-admin");
+                echo "Error executing query: " . $query . "<br>" . $this->conn->error;
+            } else {
+                header("Location: index.php?content=pages/messages&alert=delete-order-error-customer");
+                echo "Error executing query: " . $query . "<br>" . $this->conn->error;
+            }
 
         }
     }

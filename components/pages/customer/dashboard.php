@@ -1,9 +1,12 @@
 <?php
 
+use api\ProductController;
 use api\SecurityFunctions;
 
 include 'api/SecurityFunctions.php';
 $functions = new SecurityFunctions();
+
+$object = new ProductController();
 
 $functions->is_authorised(["customer"]);
 
@@ -52,7 +55,7 @@ $functions->is_authorised(["customer"]);
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                     Orders
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $object->getCountByUser('orders',  $_SESSION['id']); ?></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-comments fa-2x text-gray-300"></i>

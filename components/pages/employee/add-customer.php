@@ -56,7 +56,6 @@ if(isset($_POST['submit'])){
                         </div>
                         <div class="mb-3">
                             <select class="form-select" aria-label="Default select example" name="userrole">
-                                <option value="admin">Admin</option>
                                 <option value="customer">Customer</option>
                                 <option value="employee">Employee</option>
                             </select>

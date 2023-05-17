@@ -150,6 +150,21 @@ class ProductController
         }
     }
 
+    public function getCountByUser($table, $user)
+    {
+        // Assuming you already have a valid database connection ($conn)
+        $query = "SELECT COUNT(*) as count FROM $table WHERE user_id = $user";
+        $result = $this->conn->query($query);
+
+        if ($result) {
+            $row = $result->fetch_assoc();
+            $count = $row['count'];
+            return $count;
+        } else {
+            return 0; // Return 0 if there is an error retrieving the count
+        }
+    }
+
 
 
     public function putProduct()

@@ -13,6 +13,18 @@ require_once './api/OrderController.php';
 $object = new OrderController();
 $id = isset($_GET['user_id']) ? $_GET['user_id'] : '';
 //echo "User ID: " . $id . "<br>"; // Debug output
+
+// Check if the delete action is triggered
+if (isset($_GET['action']) && $_GET['action'] === 'deleteOrder') {
+    // Check if the order ID is provided
+    if (isset($_GET['id'])) {
+        $orderId = $_GET['id'];
+        // Call the deleteOrder method
+        $object->deleteOrder($orderId);
+        // Redirect to the appropriate page after deletion
+        exit();
+    }
+}
 ?>
 
 <div class="container">
@@ -48,7 +60,7 @@ $id = isset($_GET['user_id']) ? $_GET['user_id'] : '';
                                     <td><?php echo $order['user_id'] ?></td>
                                     <td>€<?php echo $order['order_price'] ?></td>
                                     <td>
-                                        <a href="./index.php?content=pages/customer/delete-order&id=<?php echo $order['id'] ?>
+                                        <a href="?content=pages/customer/orders&action=deleteOrder&id=<?php echo $order['id'] ?>
                                         <i aria-hidden=" true" class="fa fa-ban"></i>
                                         </a>
                                     </td>

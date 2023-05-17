@@ -1,75 +1,74 @@
 <?php
+
+use api\OrderController;
 use api\SecurityFunctions;
 use api\UserController;
 
-include 'api/SecurityFunctions.php';
-$functions = new SecurityFunctions();
+require_once 'api/SecurityFunctions.php';
+require_once 'api/UserController.php';
 
+$functions = new SecurityFunctions();
 $functions->is_authorised(["customer"]);
+
+require_once 'api/OrderController.php';
+
+$objectOrder = new OrderController();
+// Fetch users
+$objectUser = new UserController();
+$users = $objectUser->getUsers();
+
+if (isset($_POST['submit'])) {
+    $objectOrder->putOrders();
+}
+
 ?>
 
 <div class="bg-image">
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <form method="POST" action="index.php?content=pages/register-page">
+                <?php
+                if (isset($_GET['id']) && !empty($_GET['id'])) {
+                $editOrder = $_GET['id'];
+                $order = $objectOrder->getOrdersById($editOrder)[0];
+                ?>
+                <form method="POST" action="index.php?content=pages/employee/edit-order&id=<?php echo $order['id'] ?>">
                     <div class="card">
                         <div class="text-center signupHeader">
-                            <h1 id="signupHeader">Be a part of DSM Supermarkt!</h1>
-                            <label for="signupHeader">Sign up now to order groceries</label>
+                            <h1 id="signupHeader">Edit order!</h1>
+                            <label for="signupHeader">yup</label>
                         </div>
                         <div class="mb-3">
-                            <label for="inputFirstname" class="form-label">First Name:</label>
-                            <input type="text" id="firstname" class="form-control" placeholder="John" name="firstname"
-                                   required>
+                            <label for="inputAddress" class="form-label">user_id:</label>
+                            <input type="number" required class="form-control" id="inputAddress"
+                                   value="<?php echo $order['user_id'] ?>"
+                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="user_id">
                         </div>
                         <div class="mb-3">
-                            <label for="inputSurname" class="form-label">Surname:</label>
-                            <input type="text" required class="form-control" id="inputSurname" placeholder="Doe"
-                                   name="surname">
+                            <label for="inputSurname" class="form-label">Order date:</label>
+                            <input type="date" required class="form-control" id="inputSurname" placeholder="Doe"
+                                   name="order_date"
+                                   value="<?php echo date('Y-m-d', strtotime($order['order_date'])) ?>">
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="inputEmail" class="form-label float-left">order price:</label>
+                            <span class="input-group-text" id="basic-addon1">€</span>
+                            <input type="number" required class="form-control" id="inputEmail"
+                                   value="<?php echo $order['order_price'] ?>"
+                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="order_price">
                         </div>
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label float-left">Email address:</label>
-                            <input type="email" required class="form-control" id="inputEmail"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="email">
+                            <label for="inputAddress" class="form-label">quantity of products:</label>
+                            <input type="number" required class="form-control" id="inputAddress"
+                                   value="<?php echo $order['order_quantity'] ?>"
+                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="quantity">
                         </div>
-                        <div class="mb-3">
-                            <label for="inputAddress" class="form-label float-left">Address:</label>
-                            <input type="text" required class="form-control" id="inputAddress"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="address">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputZipcode" class="form-label float-left">Zipcode:</label>
-                            <input type="text" required class="form-control" id="inputZipcode"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="zipcode">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputCityname" class="form-label float-left">Cityname:</label>
-                            <input type="text" required class="form-control" id="inputCityname"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="cityname">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputPassword" class="form-label float-left">Password:</label>
-                            <input type="password" class="form-control" id="inputDateOfBirth"
-                                   aria-describedby="emailHelp"
-                                   name="password">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputConfirmPassword" class="form-label float-left">Re-enter Password:</label>
-                            <input type="password" class="form-control" id="inputDateOfBirth"
-                                   aria-describedby="emailHelp"
-                                   name="confirmPassword">
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
-                            <label class="form-label text-center">By clicking on sign up, you agree to our terms &
-                                conditions.</label>
-                        </div>
-                        <input type="submit" name="submit" class="btn btn-primary" value="Sign up"/>
+                        <input type="hidden" name="id" value="<?php echo $order['id'] ?>"/>
+                        <input type="submit" name="submit" class="btn btn-primary" value="Add order"/>
                     </div>
+                    <?php } ?>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
