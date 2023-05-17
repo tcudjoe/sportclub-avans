@@ -47,7 +47,7 @@ $products = $object->getProducts();
                             <td><?php echo $product['quantity'] ?></td>
                             <td><?php echo $product['category_id'] ?></td>
                             <td>
-                                <a href="./index.php?content=pages/admin/delete-user&id=1">
+                                <a href="?content=pages/admin/products&action=deleteProduct&id=1">
                                     <i aria-hidden="true" class="fa fa-ban"></i>
                                 </a>
                             </td>
@@ -61,7 +61,7 @@ $products = $object->getProducts();
 
                         </tbody>
                     </table>
-                    <a href="./index.php?content=pages/admin/add-user">
+                    <a href="./index.php?content=pages/admin/add-product">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary"  type="button">Add new booking</button>
                         </div>

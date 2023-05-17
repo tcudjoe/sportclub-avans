@@ -171,6 +171,7 @@ class ProductController
     {
         try {
             // your database query here
+            $userrole = $this->conn->real_escape_string($_POST["userrole"]);
             $id = $this->conn->real_escape_string($_POST['id']);
             $name = $this->conn->real_escape_string($_POST['name']);
             $description = $this->conn->real_escape_string($_POST['description']);
@@ -185,9 +186,22 @@ class ProductController
 
             $sql = $stmt->execute();
 
-            if ($sql === true) {
-                var_dump($sql, $query, $id);
-                header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
+            if ($sql == true) {
+                if ($userrole == "employee") {
+                    header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
+                } else if ($userrole == "admin") {
+                    header("Location: index.php?content=pages/messages&alert=create-product-success-admin");
+                } else {
+                    header("Location: index.php?content=pages/messages&alert=create-product-success-customer");
+                }
+            } else {
+                if ($userrole == "employee") {
+                    header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
+                } else if ($userrole == "admin") {
+                    header("Location: index.php?content=pages/messages&alert=create-product-error-admin");
+                } else {
+                    header("Location: index.php?content=pages/messages&alert=create-product-error-customer");
+                }
             }
         } catch (\mysqli_sql_exception $e) {
             var_dump($sql, $query, $id);

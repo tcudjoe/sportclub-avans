@@ -1,70 +1,72 @@
 <?php
+use api\SecurityFunctions;
+use api\UserController;
+
 include 'api/SecurityFunctions.php';
-$functions = new \api\SecurityFunctions();
+$functions = new SecurityFunctions();
+$object = new \api\ProductController();
 
 $functions->is_authorised(["admin"]);
+
+// Insert Record in contact table
+if (isset($_POST['submit'])) {
+    $object->postProduct($_POST);
+}
 ?>
+
 <div class="bg-image">
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <form method="POST" action="index.php?content=pages/register-page">
+                <form method="POST" action="index.php?content=pages/admin/add-product">
                     <div class="card">
                         <div class="text-center signupHeader">
                             <h1 id="signupHeader">Be a part of DSM Supermarkt!</h1>
                             <label for="signupHeader">Sign up now to order groceries</label>
                         </div>
                         <div class="mb-3">
-                            <label for="inputFirstname" class="form-label">First Name:</label>
-                            <input type="text" id="firstname" class="form-control" placeholder="John" name="firstname"
+                            <label for="inputFirstname" class="form-label">Name:</label>
+                            <input type="text" id="firstname" class="form-control" placeholder="John" name="name"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="inputSurname" class="form-label">Surname:</label>
-                            <input type="text" required class="form-control" id="inputSurname" placeholder="Doe"
-                                   name="surname">
+                            <label for="floatingTextarea2">Description</label>
+                            <textarea class="form-control" name="description" placeholder="description" id="floatingTextarea2" style="height: 100px"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label float-left">Email address:</label>
-                            <input type="email" required class="form-control" id="inputEmail"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputAddress" class="form-label float-left">Address:</label>
+                            <label for="inputAddress" class="form-label float-left">img url:</label>
                             <input type="text" required class="form-control" id="inputAddress"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="address">
+                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="img_address">
                         </div>
                         <div class="mb-3">
-                            <label for="inputZipcode" class="form-label float-left">Zipcode:</label>
-                            <input type="text" required class="form-control" id="inputZipcode"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="zipcode">
+                            <label for="inputZipcode" class="form-label float-left">price:</label>
+                            <input type="number" required class="form-control" id="inputZipcode"
+                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="price">
                         </div>
                         <div class="mb-3">
-                            <label for="inputCityname" class="form-label float-left">Cityname:</label>
-                            <input type="text" required class="form-control" id="inputCityname"
-                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="cityname">
+                            <label for="inputCityname" class="form-label float-left">quantity:</label>
+                            <input type="number" required class="form-control" id="inputCityname"
+                                   aria-describedby="emailHelp" placeholder="john@doe.com" name="quantity">
                         </div>
                         <div class="mb-3">
-                            <label for="inputPassword" class="form-label float-left">Password:</label>
-                            <input type="password" class="form-control" id="inputDateOfBirth"
-                                   aria-describedby="emailHelp"
-                                   name="password">
+                            <label for="inputPassword" class="form-label float-left">Category id:</label>
+                            <select class="form-select" name="category" aria-label="Default select example">
+                                <?php
+                                $categories = $object->getCategory();
+                                if (!empty($categories)) {
+                                    foreach ($categories as $category) {
+                                        ?>
+                                        <option
+                                            value="<?php echo $category['id']?>"><?php echo $category['name']; ?></option>
+                                    <?php } }?>
+                            </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="inputConfirmPassword" class="form-label float-left">Re-enter Password:</label>
-                            <input type="password" class="form-control" id="inputDateOfBirth"
-                                   aria-describedby="emailHelp"
-                                   name="confirmPassword">
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
-                            <label class="form-label text-center">By clicking on sign up, you agree to our terms &
-                                conditions.</label>
-                        </div>
-                        <input type="submit" name="submit" class="btn btn-primary" value="Sign up"/>
+                        <input type="hidden" name="userrole" value="<?php echo $_SESSION['userrole']; ?>">
+                        <input type="submit" name="submit" class="btn btn-primary" value="Add product"/>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
