@@ -9,6 +9,18 @@ $functions->is_authorised(["admin"]);
 
 $object = new ProductController();
 $products = $object->getProducts();
+
+// Check if the delete action is triggered
+if (isset($_GET['action']) && $_GET['action'] === 'deleteProduct') {
+    // Check if the order ID is provided
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        // Call the deleteOrder method
+        $object->deleteProduct($id);
+        // Redirect to the appropriate page after deletion
+        exit();
+    }
+}
 ?>
 
 <div class="container">
@@ -47,12 +59,12 @@ $products = $object->getProducts();
                             <td><?php echo $product['quantity'] ?></td>
                             <td><?php echo $product['category_id'] ?></td>
                             <td>
-                                <a href="?content=pages/admin/products&action=deleteProduct&id=1">
+                                <a href="?content=pages/admin/products&action=deleteProduct&id=<?php echo $product['id'] ?>">
                                     <i aria-hidden="true" class="fa fa-ban"></i>
                                 </a>
                             </td>
                             <td>
-                                <a href="/index.php?content=pages/admin/edit-product&id=1">
+                                <a href="/index.php?content=pages/admin/edit-product&id=<?php echo $product['id'] ?>">
                                     <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
                                 </a>
                             </td>

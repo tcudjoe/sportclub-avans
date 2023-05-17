@@ -246,6 +246,24 @@ switch ($alert) {
         <?php
         break;
 
+    case 'delete-product-success-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/products");
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            good
+        </div>
+        <?php
+        break;
+
+    case 'delete-product-error-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/users");
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            Product not deleted . try again.
+        </div>
+        <?php
+        break;
+
     case 'create-product-success-employee':
         header("Refresh: 3.5; ./index.php?content=pages/employee/products");
         ?>

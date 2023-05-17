@@ -228,19 +228,35 @@ class ProductController
 
     public function deleteProduct($productId)
     {
+        $userrole = $this->conn->real_escape_string($_POST["userrole"]);
         $query = "DELETE FROM products WHERE id = ?";
         $stmt = $this->conn->prepare($query);
 
         if ($stmt) {
             $stmt->bind_param("i", $productId);
             if ($stmt->execute()) {
-                $stmt->close();
-                header("Location: index.php?content=pages/messages&alert=delete-product-success-employee");
-                exit();
+                if ($userrole == "employee") {
+                    $stmt->close();
+                    ob_end_clean();
+                    var_dump($query, exit());
+                    header("Location: index.php?content=pages/messages&alert=delete-product-success-employee");
+                } else {
+                    $stmt->close();
+                    ob_end_clean();
+                    var_dump($query);
+
+                    header("Location: index.php?content=pages/messages&alert=delete-product-success-admin");
+                }
             } else {
-                $stmt->close();
-                header("Location: index.php?content=pages/messages&alert=delete-product-error-employee");
-                exit();
+                if ($userrole == "employee") {
+                    $stmt->close();
+                    ob_end_clean();
+                    header("Location: index.php?content=pages/messages&alert=delete-product-error-employee");
+                } else{
+                    $stmt->close();
+                    ob_end_clean();
+                    header("Location: index.php?content=pages/messages&alert=delete-product-error-admin");
+                }
             }
         } else {
             // Handle the case where the statement preparation failed
