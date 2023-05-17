@@ -26,7 +26,7 @@ class LoginController
         $id = $securityFunctions->sanitize($this->id);
 
         if (empty($email) || empty($password)) {
-            header("Location: ./index.php?content=messages&alert=no-login");
+            header("Location: ./index.php?content=pages/messages&alert=no-login");
             exit();
         } else {
             $sql = "SELECT * FROM `users` WHERE `email` = '$email' AND `password` = '$password'";
@@ -34,14 +34,14 @@ class LoginController
 
             if (!mysqli_num_rows($result)) {
                 // Username unknown
-                header("Location: ./index.php?content=messages&alert=error-login");
+                header("Location: ./index.php?content=pages/messages&alert=login-error");
                 exit();
             } else {
                 $record = mysqli_fetch_assoc($result);
 
                 if ($password !== $record["password"]) {
                     // No password match
-                    header("Location: ./index.php?content=messages&alert=error-login&email=$email&id=$id");
+                    header("Location: ./index.php?content=pages/messages&alert=error-login&email=$email&id=$id");
                     exit();
                 } else {
                     $_SESSION["id"] = $record["id"];
@@ -49,17 +49,20 @@ class LoginController
 
                     switch ($record["userrole"]) {
                         case 'customer':
-                            header("Location: ./index.php?content=pages/customer/dashboard");
+                            $redirectUrl = "./index.php?content=pages/customer/dashboard&user_id=" . $record["id"];
+                            header("Location: " . $redirectUrl);
                             exit();
                             break;
 
                         case 'employee':
-                            header("Location: ./index.php?content=pages/employee/dashboard");
+                            $redirectUrl = "./index.php?content=pages/employee/dashboard&user_id=" . $record["id"];
+                            header("Location: " . $redirectUrl);
                             exit();
                             break;
 
-                        case 'customer':
-                            header("Location: ./index.php?content=pages/admin/dashboard");
+                        case 'admin':
+                            $redirectUrl = "./index.php?content=pages/admin/dashboard&user_id=" . $record["id"];
+                            header("Location: " . $redirectUrl);
                             exit();
                             break;
                     }
@@ -67,5 +70,6 @@ class LoginController
             }
         }
     }
+
 
 }

@@ -1,5 +1,6 @@
 <?php
 
+
 use api\CategoryController;
 use api\ProductController;
 use api\UserController;
@@ -15,8 +16,6 @@ $userObj = new UserController();
 $logout = $userObj->logout();
 
 $productsObject = new ProductController();
-session_start();
-session_gc();
 
 if (isset($_GET["content"])) {
     $active = $_GET["content"];
@@ -52,9 +51,6 @@ if (isset($_GET["content"])) {
                     </ul>
                 </li>
             </ul>
-        </div>
-
-        <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <?php
                 if (isset($_SESSION["id"])) {
@@ -68,14 +64,17 @@ if (isset($_GET["content"])) {
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item ';
+                            echo ($active == "dashboard") ? "active" : "";
+                            echo '" href="./index.php?content=pages/admin/dashboard&user_id=' . $_SESSION["id"] . '">Dashboard</a>
+<a class="dropdown-item ';
                             echo ($active == "products") ? "active" : "";
-                            echo '" href="./index.php?content=pages/admin/products">Products</a>
+                            echo '" href="./index.php?content=pages/admin/products&user_id=' . $_SESSION["id"] . '">Products</a>
                         <a class="dropdown-item ';
                             echo ($active == "users") ? "active" : "";
-                            echo '" href="./index.php?content=pages/admin/users">Users</a>
+                            echo '" href="./index.php?content=pages/admin/users&user_id=' . $_SESSION["id"] . '">Users</a>
                         <a class="dropdown-item ';
                             echo ($active == "orders") ? "active" : "";
-                            echo '" href="./index.php?content=pages/admin/orders">Orders</a>
+                            echo '" href="./index.php?content=pages/admin/orders&user_id=' . $_SESSION["id"] . '">Orders</a>
                       </div>
                     </li>';
                             break;
@@ -89,14 +88,17 @@ if (isset($_GET["content"])) {
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item ';
+                            echo ($active == "dashboard") ? "active" : "";
+                            echo '" href="./index.php?content=pages/employee/dashboard&user_id=' . $_SESSION["id"] . '">Dashboard</a>
+ <a class="dropdown-item ';
                             echo ($active == "products") ? "active" : "";
-                            echo '" href="./index.php?content=pages/employee/products">Products</a>
+                            echo '" href="./index.php?content=pages/employee/products&user_id=' . $_SESSION["id"] . '">Products</a>
                         <a class="dropdown-item ';
                             echo ($active == "customers") ? "active" : "";
-                            echo '" href="./index.php?content=pages/employee/customers">Customers</a>
+                            echo '" href="./index.php?content=pages/employee/customers&user_id=' . $_SESSION["id"] . '">Customers</a>
                         <a class="dropdown-item ';
                             echo ($active == "orders") ? "active" : "";
-                            echo '" href="./index.php?content=pages/employee/orders">Orders</a>
+                            echo '" href="./index.php?content=pages/employee/orders&user_id=' . $_SESSION["id"] . '">Orders</a>
                       </div>                      
                     </li>';
                             break;
@@ -109,12 +111,12 @@ if (isset($_GET["content"])) {
                         Options
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item ';
-                            echo ($active == "c-dashboard") ? "active" : "";
-                            echo '" href="./index.php?content=pages/customer/dashboard">Dasboard</a>
-                        <a class="dropdown-item ';
-                            echo ($active == "news") ? "active" : "";
-                            echo '" href="./index.php?content=pages/customer/orders">Orders</a>
+                        <a class="dropdown-item';
+                            echo ($active == "dashboard") ? "active" : "";
+                            echo '"href="./index.php?content=pages/customer/dashboard&user_id=' . $_SESSION["id"] . '">Dasboard</a>
+                        <a class="dropdown-item';
+                            echo ($active == "orders") ? "active" : "";
+                            echo '" href="./index.php?content=pages/customer/orders&user_id=' . $_SESSION["id"] . '">Orders</a>
                       </div>                      
                     </li>';
                             break;
@@ -141,5 +143,6 @@ if (isset($_GET["content"])) {
                 ?>
             </ul>
         </div>
+
     </div>
 </nav>
