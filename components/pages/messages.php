@@ -427,4 +427,22 @@ switch ($alert) {
         </div>
         <?php
         break;
+
+    case 'update-user-error-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/users&user_id=" . $id);
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            Something went wrong while updating the user, try again later.
+        </div>
+        <?php
+        break;
+
+    case 'update-user-success-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/users&user_id=" . $id);
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            Successfully updated user.
+        </div>
+        <?php
+        break;
 }

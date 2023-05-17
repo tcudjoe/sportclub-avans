@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <form method="POST" action="index.php?content=pages/employee/customers">
+                <form method="POST" action="index.php?content=pages/employee/edit-customer">
                     <div class="card">
                         <div class="text-center signupHeader">
                             <h1 id="signupHeader">Update user</h1>

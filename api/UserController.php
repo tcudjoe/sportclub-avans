@@ -139,9 +139,21 @@ class UserController
         $sql = $this->conn->query($query);
 
         if ($sql == true) {
-            header("Location: index.php?content=pages/messages&alert=update-user-success-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=update-user-success-employee");
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=update-user-success-admin");
+            } else {
+                header("Location: index.php?content=pages/messages&alert=update-user-success-customer");
+            }
         } else {
-            header("Location: index.php?content=pages/messages&alert=update-user-error-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=update-user-error-employee");
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=update-user-error-admin");
+            } else {
+                header("Location: index.php?content=pages/messages&alert=update-user-error-customer");
+            }
         }
     }
 
