@@ -12,7 +12,6 @@ require_once './api/OrderController.php';
 
 $object = new OrderController();
 $id = isset($_GET['user_id']) ? $_GET['user_id'] : '';
-//echo "User ID: " . $id . "<br>"; // Debug output
 
 // Check if the delete action is triggered
 if (isset($_GET['action']) && $_GET['action'] === 'deleteOrder') {
@@ -74,7 +73,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'deleteOrder') {
                         } ?>
                         </tbody>
                     </table>
-                    <a href="./index.php?content=pages/customer/add-order">
+                    <a href="./index.php?content=pages/customer/add-order&user_id=<?php echo $_SESSION["id"] ?>">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" type="button">Add new booking</button>
                         </div>

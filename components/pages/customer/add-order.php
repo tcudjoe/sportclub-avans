@@ -12,10 +12,9 @@ $functions->is_authorised(["customer"]);
 $object = new OrderController();
 
 // Insert Record in contact table
-if (isset($_POST['submit'])) {
+if (isset($_POST['user_id'], $_POST['order_date'], $_POST['order_price'], $_POST['quantity'], $_POST['userrole'])) {
     $object->postOrder($_POST);
-//    var_dump($object, exit());
-}else {
+} else {
     echo "Error executing query";
 }
 ?>
@@ -25,16 +24,17 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <form method="POST" action="index.php?content=pages/customer/add-order&user_id=<?php echo $_SESSION['id']; ?>">
+                <form method="POST" action="index.php?content=pages/customer/add-order">
                     <div class="card">
                         <div class="text-center signupHeader">
                             <h1 id="signupHeader">Add order!</h1>
                             <label for="signupHeader">okay</label>
                         </div>
+
                         <div class="mb-3">
                             <label for="inputSurname" class="form-label">Order date:</label>
                             <input type="date" required class="form-control" id="inputSurname" placeholder="Doe"
-                                   name="order_date" value="<?php echo date('Y-m-d'); ?>" disabled>
+                                   name="order_date" value="<?php echo date('Y-m-d'); ?>">
                         </div>
 
                         <div class="input-group mb-3">
@@ -59,4 +59,3 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </div>
-

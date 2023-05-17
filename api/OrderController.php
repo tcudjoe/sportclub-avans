@@ -83,7 +83,7 @@ class OrderController
 
     public function postOrder($post)
     {
-        $userrole = $this->conn->real_escape_string($_GET["userrole"]);
+        $userrole = $this->conn->real_escape_string($_POST["userrole"]);
         $user_id = $this->conn->real_escape_string($_POST['user_id']);
         $order_date = $this->conn->real_escape_string($_POST['order_date']);
         $order_price = $this->conn->real_escape_string($_POST['order_price']);
@@ -95,27 +95,22 @@ class OrderController
         if ($sql == true) {
             if ($userrole == "employee") {
                 header("Location: index.php?content=pages/messages&alert=form-success-employee");
-                var_dump($query, $sql, exit());
             } else if ($userrole == "admin") {
                 header("Location: index.php?content=pages/messages&alert=form-success-admin");
-                var_dump($query, $sql, exit());
             } else {
                 header("Location: index.php?content=pages/messages&alert=form-success-customer");
-                var_dump($query, $sql, exit());
             }
         } else {
             if ($userrole == "employee") {
                 header("Location: index.php?content=pages/messages&alert=form-error-employee");
-                var_dump($query, $sql, exit());
             } else if ($userrole == "admin") {
                 header("Location: index.php?content=pages/messages&alert=form-error-admin");
-                var_dump($query, $sql, exit());
             } else {
                 header("Location: index.php?content=pages/messages&alert=form-error-customer");
-                var_dump($query, $sql, exit());
             }
         }
     }
+
 
     public function deleteOrder($orderId)
     {
@@ -129,21 +124,25 @@ class OrderController
             if ($stmt->execute()) {
                 if ($userrole == "employee") {
                     header("Location: index.php?content=pages/messages&alert=delete-order-success-employee");
+                    $stmt->close();
                 } else if ($userrole == "admin") {
                     header("Location: index.php?content=pages/messages&alert=delete-order-success-admin");
+                    $stmt->close();
                 } else {
                     header("Location: index.php?content=pages/messages&alert=delete-order-success-customer");
+                    $stmt->close();
                 }
-                $stmt->close();
             } else {
                 if ($userrole == "employee") {
                     header("Location: index.php?content=pages/messages&alert=delete-order-error-employee");
+                    $stmt->close();
                 } else if ($userrole == "admin") {
                     header("Location: index.php?content=pages/messages&alert=delete-order-error-admin");
+                    $stmt->close();
                 } else {
                     header("Location: index.php?content=pages/messages&alert=delete-order-error-customer");
+                    $stmt->close();
                 }
-                $stmt->close();
             }
         } else {
             // Handle the case where the statement preparation failed
