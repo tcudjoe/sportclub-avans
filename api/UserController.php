@@ -58,12 +58,26 @@ class UserController
         $zipcode = $this->conn->real_escape_string($_POST['zipcode']);
         $cityname = $this->conn->real_escape_string($_POST['cityname']);
         $userrole = $this->conn->real_escape_string($_POST['userrole']);
+
         $query = "INSERT INTO users (firstname, surname, email, password, address, zipcode, cityname, userrole) VALUES('$firstname','$surname','$email', '$password', '$address', '$zipcode', '$cityname', '$userrole')";
         $sql = $this->conn->query($query);
+
         if ($sql == true) {
-            header("Location: index.php?content=pages/messages&alert=create-user-success-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=create-user-success-employee");
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=create-user-success-admin");
+            } else {
+                header("Location: index.php?content=pages/messages&alert=create-user-success-customer");
+            }
         } else {
-            header("Location: index.php?content=pages/messages&alert=create-user-error-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=create-user-error-employee");
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=create-user-error-admin");
+            } else {
+                header("Location: index.php?content=pages/messages&alert=create-user-error-customer");
+            }
         }
     }
 

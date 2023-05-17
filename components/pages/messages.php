@@ -374,4 +374,23 @@ switch ($alert) {
         <?php
         break;
 
+    case 'create-user-success-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            good
+        </div>
+        <?php
+        break;
+
+    case 'create-user-error-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/orders&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
+
+
 }
