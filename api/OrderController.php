@@ -125,22 +125,16 @@ class OrderController
                 if ($userrole == "employee") {
                     header("Location: index.php?content=pages/messages&alert=delete-order-success-employee");
                     $stmt->close();
-                } else if ($userrole == "admin") {
-                    header("Location: index.php?content=pages/messages&alert=delete-order-success-admin");
-                    $stmt->close();
                 } else {
-                    header("Location: index.php?content=pages/messages&alert=delete-order-success-customer");
+                    header("Location: index.php?content=pages/messages&alert=delete-order-success-admin");
                     $stmt->close();
                 }
             } else {
                 if ($userrole == "employee") {
                     header("Location: index.php?content=pages/messages&alert=delete-order-error-employee");
                     $stmt->close();
-                } else if ($userrole == "admin") {
+                } else  {
                     header("Location: index.php?content=pages/messages&alert=delete-order-error-admin");
-                    $stmt->close();
-                } else {
-                    header("Location: index.php?content=pages/messages&alert=delete-order-error-customer");
                     $stmt->close();
                 }
             }

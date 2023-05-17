@@ -11,6 +11,18 @@ require_once './api/OrderController.php';
 
 $object = new OrderController();
 $orders = $object->getOrders();
+
+// Check if the delete action is triggered
+if (isset($_GET['action']) && $_GET['action'] === 'deleteOrder') {
+    // Check if the order ID is provided
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        // Call the deleteOrder method
+        $object->deleteOrder($id);
+        // Redirect to the appropriate page after deletion
+        exit();
+    }
+}
 ?>
 
 <div class="container">
@@ -58,6 +70,7 @@ $orders = $object->getOrders();
                         <?php } ?>
                         </tbody>
                     </table>
+
                     <a href="./index.php?content=pages/admin/add-order">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" type="button">Add new booking</button>
