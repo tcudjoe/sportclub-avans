@@ -12,7 +12,7 @@ $objectUser = new UserController();
 $userrole = $objectUser->getUsers();
 
 if (isset($_POST['submit'])) {
-    $objectUser->putCustomer();
+    $objectUser->putUser();
 }
 ?>
 
@@ -77,6 +77,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <input type="hidden" value="<?php echo $user['id']; ?>" name="id"/>
                         <?php } ?>
+                        <input type="hidden" name="userrole" value="<?php echo $_SESSION['userrole']; ?>">
                         <input type="submit" name="submit" class="btn btn-primary" value="Sign up"/>
                     </div>
                 </form>

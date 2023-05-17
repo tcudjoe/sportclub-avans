@@ -123,7 +123,7 @@ class UserController
         }
     }
 
-    public function putCustomer()
+    public function putUser()
     {
         $id = $this->conn->real_escape_string($_POST['id']);
         $firstname = $this->conn->real_escape_string($_POST['firstname']);
@@ -157,24 +157,47 @@ class UserController
         }
     }
 
-    public function deleteCustomer($customerId)
+    public function deleteUser($customerId)
     {
         $query = "DELETE FROM users WHERE id = ?";
         $stmt = $this->conn->prepare($query);
+        $userrole = $this->conn->real_escape_string($_POST['userrole']);
 
         if ($stmt) {
             $stmt->bind_param("i", $customerId);
             if ($stmt->execute()) {
-                $stmt->close();
-                ob_end_clean();
-                header("Location: index.php?content=pages/messages&alert=delete-user-success-employee");
-                exit();
-            } else {
-                $stmt->close();
-                ob_end_clean();
-                header("Location: index.php?content=pages/messages&alert=delete-user-error-employee");
-                exit();
+                if ($stmt->execute()) {
+                    if ($userrole == "employee") {
+                        $stmt->close();
+                        ob_end_clean();
+                        header("Location: index.php?content=pages/messages&alert=delete-user-success-employee");
+                    } else {
+                        $stmt->close();
+                        ob_end_clean();
+                        header("Location: index.php?content=pages/messages&alert=delete-user-success-admin");
+                    }
+                } else {
+                    if ($userrole == "employee") {
+                        $stmt->close();
+                        ob_end_clean();
+                        header("Location: index.php?content=pages/messages&alert=delete-user-error-employee");
+                    } else{
+                        $stmt->close();
+                        ob_end_clean();
+                        header("Location: index.php?content=pages/messages&alert=delete-user-error-admin");
+                    }
+                }
             }
+//                $stmt->close();
+//                ob_end_clean();
+//                header("Location: index.php?content=pages/messages&alert=delete-user-success-employee");
+//                exit();
+//            } else {
+//                $stmt->close();
+//                ob_end_clean();
+//                header("Location: index.php?content=pages/messages&alert=delete-user-error-employee");
+//                exit();
+//            }
         } else {
             // Handle the case where the statement preparation failed
             // You might want to log an error or display an error message

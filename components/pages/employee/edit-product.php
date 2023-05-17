@@ -96,6 +96,8 @@ if (isset($_POST['submit'])) {
                             <input type="hidden" name="id" value="<?php echo $product['id'] ?>"/>
 
                         <?php } ?>
+                        <input type="hidden" name="userrole" value="<?php echo $_SESSION['userrole']; ?>">
+
                         <input type="submit" name="submit" class="btn btn-primary" value="Update product"/>
                     </div>
                 </form>

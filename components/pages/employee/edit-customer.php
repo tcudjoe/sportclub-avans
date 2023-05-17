@@ -12,7 +12,7 @@ $objectUser = new UserController();
 $userrole = $objectUser->getUsers();
 
 if (isset($_POST['submit'])) {
-    $objectUser->putCustomer();
+    $objectUser->putUser();
 }
 ?>
 

@@ -61,6 +61,8 @@ if (isset($_POST['submit'])) {
                                     <?php } }?>
                             </select>
                         </div>
+                        <input type="hidden" name="userrole" value="<?php echo $_SESSION['userrole']; ?>">
+
                         <input type="submit" name="submit" class="btn btn-primary" value="Add product"/>
                     </div>
                 </form>

@@ -12,6 +12,18 @@ require_once './api/OrderController.php';
 
 $object = new UserController();
 $users = $object->getUsers();
+
+// Check if the delete action is triggered
+if (isset($_GET['action']) && $_GET['action'] === 'deleteUser') {
+    // Check if the order ID is provided
+    if (isset($_GET['id'])) {
+        $userid = $_GET['id'];
+        // Call the deleteOrder method
+        $object->deleteUser($userid);
+        // Redirect to the appropriate page after deletion
+        exit();
+    }
+}
 ?>
 
 <div class="container">
@@ -32,6 +44,7 @@ $users = $object->getUsers();
                             <th scope="col">address</th>
                             <th scope="col">zipcode</th>
                             <th scope="col">cityname</th>
+                            <th scope="col">User role</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
@@ -49,9 +62,9 @@ $users = $object->getUsers();
                                 <td><?php echo $user['address'] ?></td>
                                 <td><?php echo $user['zipcode'] ?></td>
                                 <td><?php echo $user['cityname'] ?></td>
-                                <td><?php echo $user['cityname'] ?></td>
+                                <td><?php echo $user['userrole'] ?></td>
                                 <td>
-                                    <a href="./index.php?content=pages/admin/delete-user&id=<?php echo $user['id'] ?>
+                                    <a href="?content=pages/admin/users&action=deleteUser&id=<?php echo $user['id'] ?>
                                         <i aria-hidden="true" class="fa fa-ban"></i>
                                     </a>
                                 </td>

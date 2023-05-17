@@ -64,6 +64,8 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="input-group mb-3">
                         </div>
+                        <input type="hidden" name="userrole" value="<?php echo $_SESSION['userrole']; ?>">
+
                         <input type="submit" name="submit" class="btn btn-primary" value="Add order"/>
                     </div>
                 </form>

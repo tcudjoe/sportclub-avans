@@ -208,6 +208,24 @@ switch ($alert) {
         <?php
         break;
 
+    case 'delete-user-error-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/users");
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            User not updated. try again.
+        </div>
+        <?php
+        break;
+
+    case 'delete-user-success-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/users");
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            User successfully deleted.
+        </div>
+        <?php
+        break;
+
     case 'delete-product-error-employee':
         header("Refresh: 3.5; ./index.php?content=pages/employee/users");
         ?>

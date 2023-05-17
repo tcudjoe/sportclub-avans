@@ -66,6 +66,7 @@ if(isset($_POST['submit'])){
                                    aria-describedby="emailHelp"
                                    name="password">
                         </div>
+                        <input type="hidden" name="userrole" value="<?php echo $_SESSION['userrole']; ?>">
 
                         <input type="submit" name="submit" class="btn btn-primary" value="Sign up"/>
                     </div>

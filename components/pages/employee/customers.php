@@ -14,12 +14,12 @@ require_once './api/OrderController.php';
 $object = new UserController();
 
 // Check if the delete action is triggered
-if (isset($_GET['action']) && $_GET['action'] === 'deleteCustomer') {
+if (isset($_GET['action']) && $_GET['action'] === 'deleteUser') {
     // Check if the order ID is provided
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
         // Call the deleteOrder method
-        $object->deleteCustomer($id);
+        $object->deleteUser($id);
         // Redirect to the appropriate page after deletion
         exit();
     }
