@@ -229,7 +229,7 @@ switch ($alert) {
         break;
 
     case 'create-product-success-employee':
-        header("Refresh: 3.5; ./index.php?content=pages/employee/users");
+        header("Refresh: 3.5; ./index.php?content=pages/employee/products");
         ?>
 
         <div class="alert alert-success text-center container" role="alert">
@@ -239,7 +239,7 @@ switch ($alert) {
         break;
 
     case 'create-product-error-employee':
-        header("Refresh: 3.5; ./index.php?content=pages/employee/users");
+        header("Refresh: 3.5; ./index.php?content=pages/employee/products");
         ?>
 
         <div class="alert alert-danger text-center container" role="alert">
@@ -357,7 +357,7 @@ switch ($alert) {
         break;
 
     case 'create-product-success-admin':
-        header("Refresh: 3.5; ./index.php?content=pages/admin/orders&user_id=" . $_SESSION['id']);
+        header("Refresh: 3.5; ./index.php?content=pages/admin/products&user_id=" . $_SESSION['id']);
         ?>
         <div class="alert alert-success text-center container" role="alert">
             good
@@ -366,7 +366,7 @@ switch ($alert) {
         break;
 
     case 'create-product-error-admin':
-        header("Refresh: 3.5; ./index.php?content=pages/admin/orders&user_id=" . $_SESSION['id']);
+        header("Refresh: 3.5; ./index.php?content=pages/admin/products&user_id=" . $_SESSION['id']);
         ?>
         <div class="alert alert-warning text-center container" role="alert">
             bad
@@ -392,5 +392,39 @@ switch ($alert) {
         <?php
         break;
 
+    case 'update-product-success-employee':
+        header("Refresh: 3.5; ./index.php?content=pages/employee/products&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
 
+    case 'update-product-error-employee':
+        header("Refresh: 3.5; ./index.php?content=pages/employee/products&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
+
+    case 'update-product-success-admin':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/products&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-success text-center container" role="alert">
+            good
+        </div>
+        <?php
+        break;
+
+    case 'update-product-error-employee':
+        header("Refresh: 3.5; ./index.php?content=pages/admin/products&user_id=" . $_SESSION['id']);
+        ?>
+        <div class="alert alert-warning text-center container" role="alert">
+            bad
+        </div>
+        <?php
+        break;
 }

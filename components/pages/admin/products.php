@@ -52,7 +52,7 @@ $products = $object->getProducts();
                                 </a>
                             </td>
                             <td>
-                                <a href="/index.php?content=pages/admin/edit-user&id=1">
+                                <a href="/index.php?content=pages/admin/edit-product&id=1">
                                     <i aria-hidden="true" class="fa fa-pencil-square-o"></i>
                                 </a>
                             </td>

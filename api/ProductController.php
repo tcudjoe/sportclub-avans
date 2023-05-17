@@ -116,6 +116,7 @@ class ProductController
 
     public function postProduct($post)
     {
+        $userrole = $this->conn->real_escape_string($_POST["userrole"]);
         $name = $this->conn->real_escape_string($_POST['name']);
         $description = $this->conn->real_escape_string($_POST['description']);
         $img_address = $this->conn->real_escape_string($_POST['img_address']);
@@ -127,11 +128,21 @@ class ProductController
         $sql = $this->conn->query($query);
 
         if ($sql == true) {
-            var_dump($sql, $query);
-            header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=create-product-success-admin");
+            } else {
+                header("Location: index.php?content=pages/messages&alert=create-product-success-customer");
+            }
         } else {
-            var_dump($sql, $query);
-            header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
+            if ($userrole == "employee") {
+                header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
+            } else if ($userrole == "admin") {
+                header("Location: index.php?content=pages/messages&alert=create-product-error-admin");
+            } else {
+                header("Location: index.php?content=pages/messages&alert=create-product-error-customer");
+            }
         }
     }
 
@@ -188,19 +199,19 @@ class ProductController
 
             if ($sql == true) {
                 if ($userrole == "employee") {
-                    header("Location: index.php?content=pages/messages&alert=create-product-success-employee");
+                    header("Location: index.php?content=pages/messages&alert=update-product-success-employee");
                 } else if ($userrole == "admin") {
-                    header("Location: index.php?content=pages/messages&alert=create-product-success-admin");
+                    header("Location: index.php?content=pages/messages&alert=update-product-success-admin");
                 } else {
-                    header("Location: index.php?content=pages/messages&alert=create-product-success-customer");
+                    header("Location: index.php?content=pages/messages&alert=update-product-success-customer");
                 }
             } else {
                 if ($userrole == "employee") {
-                    header("Location: index.php?content=pages/messages&alert=create-product-error-employee");
+                    header("Location: index.php?content=pages/messages&alert=update-product-error-employee");
                 } else if ($userrole == "admin") {
-                    header("Location: index.php?content=pages/messages&alert=create-product-error-admin");
+                    header("Location: index.php?content=pages/messages&alert=update-product-error-admin");
                 } else {
-                    header("Location: index.php?content=pages/messages&alert=create-product-error-customer");
+                    header("Location: index.php?content=pages/messages&alert=update-product-error-customer");
                 }
             }
         } catch (\mysqli_sql_exception $e) {
