@@ -22,6 +22,12 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
+<style type="text/css">
+    .card {
+        min-height: 900px !important;
+        padding: 50px
+    }
+</style>
 
 <div class="bg-image">
     <div class="container">

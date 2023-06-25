@@ -19,7 +19,7 @@ session_gc();
         <?php include("./components/components/navbar.php")?>
     </header>
 
-    <main>
+    <main style="min-height: 800px">
         <?php include("./content.php") ?>
     </main>
 

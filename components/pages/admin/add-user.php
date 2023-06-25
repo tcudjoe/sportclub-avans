@@ -14,12 +14,20 @@ if(isset($_POST['submit'])){
     $objectUser->postUser($_POST);
 }
 ?>
+
+<style type="text/css">
+.card {
+    min-height: 900px !important;
+    padding: 50px
+}
+</style>
+
 <div class="bg-image">
     <div class="container">
         <div class="row">
-            <div class="col-12 d-flex justify-content-center">
-                <form method="POST" action="index.php?content=pages/employee/add-customer">
-                    <div class="card">
+            <div class="col-12 justify-content-center">
+                <form method="POST"  action="index.php?content=pages/employee/add-customer">
+                    <div class="card" style="">
                         <div class="text-center signupHeader">
                             <h1 id="signupHeader">Create user</h1>
                             <label for="signupHeader">sure</label>

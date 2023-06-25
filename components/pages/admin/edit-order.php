@@ -23,10 +23,17 @@ if (isset($_POST['submit'])) {
 
 ?>
 
+<style type="text/css">
+    .card {
+        min-height: 500px !important;
+        padding: 30px
+    }
+</style>
+
 <div class="bg-image">
     <div class="container">
         <div class="row">
-            <div class="col-12 d-flex justify-content-center">
+            <div class="col-12">
                 <?php
                 if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $editOrder = $_GET['id'];

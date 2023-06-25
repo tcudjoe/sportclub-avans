@@ -8,6 +8,14 @@ $category_id = $_GET['category_id'];
 
 ?>
 
+<style type="text/css">
+    .card {
+        min-width: 320px;
+        min-height: 700px;
+        padding: 10px
+    }
+</style>
+
 <section id="category-products">
     <div class="container">
         <div class="row">
