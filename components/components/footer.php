@@ -1,5 +1,10 @@
-<nav class="navbar bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Footer</a>
     </div>
-</nav>
+
+    <style type="text/css">
+        footer {
+            background-color: lightblue;
+            height: 300px;
+        }
+    </style>

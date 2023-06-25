@@ -26,6 +26,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'deleteUser') {
 }
 ?>
 
+<style type="text/css">
+    .card {
+        min-height: 200px !important;
+        padding: 50px
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">

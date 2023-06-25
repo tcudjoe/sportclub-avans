@@ -9,6 +9,14 @@ $object = new ProductController();
 $products = $object->getProducts();
 ?>
 
+<style type="text/css">
+    .card {
+        min-width: 320px;
+        min-height: 700px;
+        padding: 10px
+    }
+</style>
+
 <section id="home-cards">
     <div class="container">
         <div class="row">

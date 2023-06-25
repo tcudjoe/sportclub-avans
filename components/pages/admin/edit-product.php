@@ -15,10 +15,17 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
+<style type="text/css">
+    .card {
+        min-height: 900px !important;
+        padding: 50px
+    }
+</style>
+
 <div class="bg-image">
     <div class="container">
         <div class="row">
-            <div class="col-12 d-flex justify-content-center">
+            <div class="col-12">
                 <form method="POST" action="index.php?content=pages/admin/edit-product">
                     <div class="card">
                         <div class="text-center signupHeader">
